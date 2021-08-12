@@ -11,7 +11,7 @@ export class ImageGeneratorComponent implements OnInit {
   public inputValue!: string;
   public seed!: string;
   public length = 800;
-  public inputChanged: Subject<string> = new Subject<string>();
+  public inputChanged: Subject<void | string> = new Subject<void | string>();
 
   constructor() {
   }

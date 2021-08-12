@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   };
 
   // To unsubscribe all other observables on component destruction
-  private readonly destroy$ = new Subject();
+  private readonly destroy$ = new Subject<void>();
 
   constructor(private project: ProjectCardService, private media: MediaObserver, private router: Router, private dialog: MatDialog) {
   }
