@@ -90,7 +90,7 @@ export class AuthService {
     // Call when app reloads after user logs in with Auth0
     const params = window.location.search;
     if (params.includes('code=') && params.includes('state=')) {
-      let targetRoute: string; // Path to redirect to after login processsed
+      let targetRoute: string; // Path to redirect to after login processed
       const authComplete$ = this.handleRedirectCallback$.pipe(
         // Have client, now call method to handle auth callback redirect
         tap(cbRes => {

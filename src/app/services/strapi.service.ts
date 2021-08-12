@@ -38,7 +38,7 @@ export class ProjectCardService {
     const url = `${environment.strapiHost}/project-cards`;
     this.cache = this.http.get(url).pipe(
       shareReplay(1), // Send last response on future subscriptions on this observable
-      map((itemList: any) => itemList.map((item: any) => this.adapter.adapt(item))), // List of items reponse: [{item}]
+      map((itemList: any) => itemList.map((item: any) => this.adapter.adapt(item))), // List of items response: [{item}]
     );
     return this.cache;
   }

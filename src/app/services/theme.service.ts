@@ -7,7 +7,7 @@ import { BaseTheme } from '../models/theme.model';
   providedIn: 'root'
 })
 export class ThemeService {
-  // Potential antipattern: master data is defined within the service (fetch from API)
+  // Potential anti-pattern: master data is defined within the service (fetch from API)
   private readonly ardisDarkTheme = new BaseTheme('Dark', 'ardis-dark-theme', 'al-dark');
   private readonly ardisLightTheme = new BaseTheme('Light', 'ardis-light-theme', 'al-light');
 

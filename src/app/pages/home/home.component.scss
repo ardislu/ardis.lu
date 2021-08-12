@@ -1,6 +1,6 @@
 // Known Angular bug: the '!important' CSS property will not be applied when using [ngStyle] or [style.xxx]
 // https://github.com/angular/angular/issues/12009
-// Workaround: use a class containing this single style. Remember to update the SCSS classes whenenver the gutters are updated.
+// Workaround: use a class containing this single style. Remember to update the SCSS classes whenever the gutters are updated.
 
 .container-margin-xs {
   margin-left: 10px !important;
