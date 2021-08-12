@@ -41,7 +41,7 @@ ng serve
 
 5. Go to the [development server](http://localhost:4200/) in your browser
 
-# Testing on Other Devices
+# Testing on other devices
 To connect to the development server from other devices, initiate the development server on all IP addresses on the local machine:
 ```
 ng serve --host 0.0.0.0
@@ -57,17 +57,17 @@ Now you can connect to the development server from any device on the local netwo
 192.168.1.21:4200
 ```
 
-# Note on Web Server Configuration
-For Angular apps using HTML5 URLs (i.e. URLs that look like separate pages but are actually not), we need to [configure the web server to fallback to index.html](https://angular.io/guide/deployment#server-configuration). 
+# Web server configuration
+For Angular apps using HTML5 URLs (i.e. URLs that look like separate pages but are actually not), we need to [configure the web server to fallback to index.html](https://angular.io/guide/deployment#server-configuration).
 
-If you use `npm start` or `npm run stage` to host a development web server, the development web server is already configured to redirect as required. 
+If you use `npm start` or `npm run stage` to host a development web server, the development web server is already configured to redirect as required.
 
 # Pre-commit hook
 The npm postinstall script configures git locally to run a custom pre-commit hook, located at `.git-hooks/pre-commit`.
 
 The `pre-commit` file is a bash script that pipes any staged .js or .ts files to `eslint`, and any staged .css or .scss files to `stylelint`.
 
-# Testing
+# Unit and e2e testing
 This project uses [Jest](https://www.npmjs.com/package/jest) for unit testing (instead of Jasmine + Karma), and [Playwright](https://www.npmjs.com/package/playwright) for e2e testing (instead of Protractor). The Angular architects have been adapted for these frameworks so tests are still run with the usual `npm run test` and `npm run e2e`.
 
 # Cloudflare Tunnel
@@ -75,26 +75,7 @@ I use `cloudflared` in the `start:tunnel` and `stage:tunnel` npm scripts. This c
 
 **WARNING:** Cloudflare Tunnel may cache your website even after you've closed the local server. So don't use this command if there's any sensitive content.
 
-# Developer Reference
-
-## Helpful Global Packages
-These packages might be useful to have outside the local context (see below for usage):
-```
-npm install -g depcheck
-npm install -g npm-check-updates
-npm install -g local-web-server
-npm install -g lighthouse
-npm install -g svgo
-```
-
-## Helpful Development Packages
-In addition to the default packages included by Angular CLI, I've added the following packages as developer dependencies in package.json:
-```
-local-web-server
-source-map-explorer
-```
-
-## Helpful npm Scripts
+# npm scripts
 Modified `npm start` runs `ng serve --hmr --host 0.0.0.0` instead of the default `ng serve`.
 ```
 npm start
@@ -123,70 +104,4 @@ npm run analyze
 Lint the entire project with `ng lint` (for Typescript and HTML) and `stylelint` (for SCSS).
 ```
 npm run lint
-```
-
-## Helpful Assorted Commands
-Generate a new module "XXX" and add a "YYY" component as the route inside app.module. Use this set up a Single Component Angular Module (SCAM) to enable lazy-loading for a new project/card.
-```
-ng g module XXX --route YYY --module app.module
-```
-
-Example: add the colab-hosting page. 
-```
-ng g module pages/colab-hosting --route colab-hosting --module app.module
-```
-
-List all global packages
-```
-npm list -g --depth 0
-```
-
-Check that all global packages are at their latest version
-```
-ncu -g
-```
-
-Check all local packages are at their latest MINOR version (within the same major version)
-```
-npm outdated
-```
-
-Check all local packages are at their latest version (includes major versions)
-```
-ncu
-```
-
-Check package.json for unused dependencies
-```
-depcheck
-```
-
-Remove packages from node_modules that are not listed in package.json
-```
-npm prune
-```
-
-Install all dependencies per package.json and update package-lock.json accordingly
-```
-npm install
-```
-
-Delete node_modules and install all dependencies per package-lock.json, throw an error if package.json is inconsistent with package-lock.json
-```
-npm ci
-```
-
-Run simple web server configured for SPAs (redirects all URLs to index.html) and output dynamic access stats to console
-```
-ws --spa index.html --log.format stats
-```
-
-Run a [Lighthouse](https://developers.google.com/web/tools/lighthouse) audit on the development server (assuming hosted with the `ws` command above)
-```
-lighthouse http://127.0.0.1:8000/ --view
-```
-
-Minify a .svg file
-```
-svgo example.svg
 ```
