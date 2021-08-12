@@ -14,11 +14,11 @@
   "scripts": {
     "postinstall": "git config core.hooksPath ./git-hooks",
     "ng": "ng",
-    "start": "ng serve --hmr --host 0.0.0.0",
-    "build": "ng build",
-    "test": "ng test",
     "lint": "ng lint && stylelint \"src/**/*.scss\"",
+    "test": "ng test",
     "e2e": "ng e2e",
+    "build": "ng build",
+    "start": "ng serve --hmr --host 0.0.0.0",
     "stage": "ng build --configuration production && cd dist/ardis-lu-frontend && ws --spa index.html --log.format stats",
     "analyze": "ng build --configuration production --source-map --vendor-chunk=false && source-map-explorer dist/ardis-lu-frontend/main.*.js"
   },
