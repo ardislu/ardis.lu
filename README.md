@@ -1,5 +1,4 @@
 # ardis.lu
-[![Build Status](https://travis-ci.com/ardislu/ardislu.github.io.svg?branch=develop)](https://travis-ci.com/ardislu/ardislu.github.io)
 [![Maintainability](https://api.codeclimate.com/v1/badges/e036880db60c5df107c7/maintainability)](https://codeclimate.com/github/ardislu/ardislu.github.io/maintainability)
 
 This project contains the Angular codebase for my personal website [ardis.lu](https://ardis.lu).
@@ -59,11 +58,9 @@ Now you can connect to the development server from any device on the local netwo
 ```
 
 # Note on Web Server Configuration
-For Angular apps using HTML5 URLs (i.e. URLs that look like separate pages but are actually not), we need to [configure the web server to fallback to index.html](https://angular.io/guide/deployment#server-configuration). Since GitHub Pages doesn't allow web server configurations (as of now), we can simulate the same effect by copying `index.html` to the magic file `404.html`. This step is included in the TravisCI .yml configuration, so no manual intervention is required. 
+For Angular apps using HTML5 URLs (i.e. URLs that look like separate pages but are actually not), we need to [configure the web server to fallback to index.html](https://angular.io/guide/deployment#server-configuration). 
 
-This trick may cause issues with SEO or website auditors like Lighthouse since all requests to URLs other than the root will result in a `HTTP 404` code. However, the user experience is not affected. 
-
-If you use `ng serve` or `npm run stage` to host a development web server, this step is not necessary since the development web server is appropriately configured. 
+If you use `npm start` or `npm run stage` to host a development web server, the development web server is already configured to redirect as required. 
 
 # Pre-commit hook
 The npm postinstall script configures git locally to run a custom pre-commit hook, located at `.git-hooks/pre-commit`.
