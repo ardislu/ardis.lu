@@ -14,18 +14,9 @@
       <p>
         {{ aboutCard.description }}
       </p>
-      <button mat-icon-button>
-        <mat-icon svgIcon="text_snippet"></mat-icon>
-      </button>
-      <button mat-icon-button>
-        <mat-icon svgIcon="email"></mat-icon>
-      </button>
-      <button mat-icon-button>
+      <a href="https://github.com/ardislu/ardis.lu" aria-label="GitHub" mat-icon-button>
         <mat-icon svgIcon="github"></mat-icon>
-      </button>
-      <button mat-icon-button>
-        <mat-icon svgIcon="linkedin"></mat-icon>
-      </button>
+      </a>
     </mat-card-content>
     <mat-card-actions>
       <button mat-button color="accent" (click)="goBack()">BACK</button>
