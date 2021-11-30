@@ -10,7 +10,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { NgxGoogleAnalyticsModule } from 'ngx-google-analytics';
 
 // Progressive web app
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -28,7 +27,6 @@ import { environment } from '../environments/environment';
     HammerModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    NgxGoogleAnalyticsModule.forRoot(environment.googleAnalyticsID),
     AppRoutingModule,
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production })
   ],

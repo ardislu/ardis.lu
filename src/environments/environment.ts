@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  googleAnalyticsID: 'G-PMH4HP6RNK',
   strapiHost: 'https://cms.ardis.lu'
 };
 
