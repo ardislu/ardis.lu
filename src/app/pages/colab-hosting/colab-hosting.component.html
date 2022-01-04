@@ -12,7 +12,7 @@
   <mat-card-content>
     <mat-form-field class="text-block">
       <mat-label>ngrok URL</mat-label>
-      <input matInput [(ngModel)]="colabHost" (change)="setColabHost($event)" type="url" pattern="(https?:\/\/)?\w+.ngrok.io\/?"
+      <input matInput [(ngModel)]="colabHost" (change)="setColabHost($event)" type="url" pattern="(https?:\/\/)?(\w|-)+\.ngrok\.io\/?"
         placeholder="https://xxxxxxxxxxxx.ngrok.io/" required>
     </mat-form-field>
 

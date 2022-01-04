@@ -55,16 +55,16 @@ export class ColabHostingComponent implements OnInit {
     const value = (e.target as HTMLInputElement).value;
 
     // Matches: `http://${host}.ngrok.io` OR `https://${host}.ngrok.io` OR `http://${host}.ngrok.io/` OR `https://${host}.ngrok.io/`
-    if (/^(https?:\/\/)\w+.ngrok.io\/?$/.test(value)) {
+    if (/^(https?:\/\/)(\w|-)+\.ngrok\.io\/?$/.test(value)) {
       const url = new URL(value);
       this.colabHost = `https://${url.host}`;
     }
     // Matches: `${host}.ngrok.io`
-    else if (/^\w+.ngrok.io$/.test(value)) {
+    else if (/^(\w|-)+\.ngrok\.io$/.test(value)) {
       this.colabHost = `https://${value}`;
     }
     // Matches: `${host}.ngrok.io/`
-    else if (/^\w+.ngrok.io\/?$/.test(value)) {
+    else if (/^(\w|-)+\.ngrok\.io\/$/.test(value)) {
       this.colabHost = `https://${value.slice(0, -1)}`;
     }
     else {
