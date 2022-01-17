@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { ImageGeneratorRoutingModule } from './image-generator-routing.module';
 import { ImageGeneratorComponent } from './image-generator.component';
 
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
@@ -20,7 +19,6 @@ import { RandomImageModule } from '../../components/random-image/random-image.mo
   imports: [
     CommonModule,
     ImageGeneratorRoutingModule,
-    NgxSkeletonLoaderModule,
     MatCardModule,
     MatButtonModule,
     FormsModule,
