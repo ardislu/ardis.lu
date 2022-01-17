@@ -30,14 +30,11 @@
 <!-- Placeholder loading bars -->
 <ng-template #loading>
   <mat-card class="settings-card">
-    <mat-card-header>
-      <mat-card-title>
-        <ngx-skeleton-loader animation="pulse" [theme]="{'background-color': '#303030'}"></ngx-skeleton-loader>
-      </mat-card-title>
-    </mat-card-header>
+    <mat-card-title>
+      <app-skeleton></app-skeleton>
+    </mat-card-title>
     <mat-card-content>
-      <ngx-skeleton-loader [count]="5" animation="pulse" [theme]="{'background-color': '#303030'}">
-      </ngx-skeleton-loader>
+      <app-skeleton [count]="5"></app-skeleton>
     </mat-card-content>
   </mat-card>
 </ng-template>

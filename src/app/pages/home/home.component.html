@@ -28,14 +28,13 @@
     <div *ngFor="let num of placeholderCards" [fxFlex]="columnPercent">
       <mat-card>
         <mat-card-title>
-          <ngx-skeleton-loader animation="pulse"></ngx-skeleton-loader>
+          <app-skeleton></app-skeleton>
         </mat-card-title>
         <mat-card-content>
-          <ngx-skeleton-loader [count]="10" animation="pulse">
-          </ngx-skeleton-loader>
+          <app-skeleton [count]="10"></app-skeleton>
         </mat-card-content>
         <mat-card-actions>
-          <ngx-skeleton-loader animation="pulse"></ngx-skeleton-loader>
+          <app-skeleton></app-skeleton>
         </mat-card-actions>
       </mat-card>
     </div>

@@ -10,7 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 
 import { DialogModule } from '../../components/dialog/dialog.module';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { LoaderModule } from 'src/app/components/loader/loader.module';
 
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SettingsComponent } from './settings.component';
@@ -28,7 +28,7 @@ import { SettingsComponent } from './settings.component';
     MatFormFieldModule,
     MatSelectModule,
     DialogModule,
-    NgxSkeletonLoaderModule,
+    LoaderModule,
     SettingsRoutingModule
   ]
 })

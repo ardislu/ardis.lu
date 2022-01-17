@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AboutRoutingModule } from './about-routing.module';
 import { AboutComponent } from './about.component';
 
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { LoaderModule } from 'src/app/components/loader/loader.module';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     CommonModule,
     AboutRoutingModule,
-    NgxSkeletonLoaderModule,
+    LoaderModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule

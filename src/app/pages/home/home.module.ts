@@ -5,7 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { DialogModule } from '../../components/dialog/dialog.module';
 
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { LoaderModule } from 'src/app/components/loader/loader.module';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -19,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     HomeRoutingModule,
     DialogModule,
-    NgxSkeletonLoaderModule,
+    LoaderModule,
     FlexLayoutModule,
     LayoutModule,
     MatCardModule,

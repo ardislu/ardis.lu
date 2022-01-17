@@ -28,14 +28,11 @@
 <!-- Placeholder loading bars -->
 <ng-template #loading>
   <mat-card class="about-card">
-    <mat-card-header>
-      <mat-card-title>
-        <ngx-skeleton-loader animation="pulse"></ngx-skeleton-loader>
-      </mat-card-title>
-    </mat-card-header>
+    <mat-card-title>
+      <app-skeleton></app-skeleton>
+    </mat-card-title>
     <mat-card-content>
-      <ngx-skeleton-loader [count]="8" animation="pulse">
-      </ngx-skeleton-loader>
+      <app-skeleton [count]="8"></app-skeleton>
     </mat-card-content>
   </mat-card>
 </ng-template>
