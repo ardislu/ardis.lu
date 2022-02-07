@@ -20,6 +20,8 @@ export class SnakeGameComponent implements OnInit {
   private ctx!: CanvasRenderingContext2D;
   private player!: SnekPlayer;
   private food!: SnekPiece;
+  private isActive!: boolean;
+  private previousRender!: number;
   private gameLoop!: number;
   private gameOverTimer!: number;
 
@@ -41,12 +43,21 @@ export class SnakeGameComponent implements OnInit {
     this.spawnFood();
 
     // Begin game loop
-    this.gameLoop = window.setInterval(this.tick.bind(this), 100);
+    this.isActive = true;
+    this.previousRender = 0;
+    this.gameLoop = window.requestAnimationFrame(this.tick.bind(this));
   }
 
-  tick(): void {
-    this.player = this.move(this.player);
-    this.drawCanvas();
+  tick(timestamp: number): void {
+    if (timestamp - this.previousRender > 100) {
+      this.previousRender = timestamp;
+      this.player = this.move(this.player);
+      this.drawCanvas();
+    }
+
+    if (this.isActive) {
+      this.gameLoop = window.requestAnimationFrame(this.tick.bind(this));
+    }
   }
 
   move(player: SnekPlayer): SnekPlayer {
@@ -138,7 +149,8 @@ export class SnakeGameComponent implements OnInit {
   }
 
   endGame(): void {
-    clearInterval(this.gameLoop);
+    window.cancelAnimationFrame(this.gameLoop);
+    this.isActive = false;
     this.gameEnded.emit(this.player.body.length);
   }
 
