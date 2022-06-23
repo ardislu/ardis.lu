@@ -1,4 +1,5 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
+@import "ardis-theme";
 
 /* Use system font stack */
 $system-typography: mat.define-typography-config(
@@ -7,9 +8,6 @@ $system-typography: mat.define-typography-config(
 
 // Include only once per project
 @include mat.core($system-typography);
-
-/* Custom themes */
-@import "ardis-theme.scss";
 
 .al-dark {
   @include mat.all-component-colors($ardis-dark-theme);
@@ -37,9 +35,9 @@ input::-webkit-inner-spin-button {
   display: none;
 }
 
-// Disable scroll to change number on number input fields (Firefox)
-input[type=number] {
-  -moz-appearance: textfield;
+// Disable scroll to change number on number input fields
+input[type="number"] {
+  appearance: textfield;
 }
 
 /* Global utility classes */

@@ -1,6 +1,8 @@
 {
   "extends": "stylelint-config-standard-scss",
   "rules": {
-    "no-empty-source": null
+    "no-empty-source": null,
+    "max-line-length": null,
+    "color-function-notation": null
   }
 }

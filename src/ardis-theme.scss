@@ -1,4 +1,4 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 
 // Primary color palette, original color #558dd1
 $al-blue: (
@@ -106,7 +106,6 @@ $al-yellow: (
 $al-primary: mat.define-palette($al-blue);
 $al-accent: mat.define-palette($al-teal);
 $al-warn: mat.define-palette($al-yellow);
-
 $ardis-dark-theme: mat.define-dark-theme(
   (
     color: (
@@ -116,7 +115,6 @@ $ardis-dark-theme: mat.define-dark-theme(
     ),
   )
 );
-
 $ardis-light-theme: mat.define-light-theme(
   (
     color: (
