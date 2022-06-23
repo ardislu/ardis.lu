@@ -12,7 +12,7 @@
     "Ardis Lu <ardis@ardis.lu> (https://ardis.lu)"
   ],
   "scripts": {
-    "postinstall": "git config core.hooksPath ./git-hooks",
+    "postinstall": "git config core.hooksPath ./.git-hooks",
     "ng": "ng",
     "lint": "ng lint && stylelint \"src/**/*.scss\"",
     "test": "ng test",
