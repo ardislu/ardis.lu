@@ -1,40 +1,33 @@
-<div fxLayout="row wrap" fxLayoutAlign="center" [ngStyle]="containerStyle" [ngClass]="containerMarginClass"
-  [fxLayoutGap]="layoutGap">
-
+<main>
   <!-- Project cards fetched from API  -->
   <ng-container *ngIf="projectCards$ | async as projectCards; else loading">
-    <div *ngFor="let project of projectCards" [fxFlex]="columnPercent">
-      <mat-card>
-        <mat-card-title>
-          <div>{{ project.title }}</div>
-        </mat-card-title>
-        <mat-card-content>
-          {{ project.description }}
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button color="accent" (click)="openProject(project.route)">
-            EXPLORE
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+    <mat-card *ngFor="let project of projectCards">
+      <mat-card-title>
+        <div>{{ project.title }}</div>
+      </mat-card-title>
+      <mat-card-content>
+        {{ project.description }}
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="accent" (click)="openProject(project.route)">
+          EXPLORE
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </ng-container>
 
   <!-- Skeleton cards as placeholders while loading -->
   <ng-template #loading>
-    <div *ngFor="let num of placeholderCards" [fxFlex]="columnPercent">
-      <mat-card>
-        <mat-card-title>
-          <app-skeleton></app-skeleton>
-        </mat-card-title>
-        <mat-card-content>
-          <app-skeleton [count]="10"></app-skeleton>
-        </mat-card-content>
-        <mat-card-actions>
-          <app-skeleton></app-skeleton>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+    <mat-card *ngFor="let num of placeholderCards">
+      <mat-card-title>
+        <app-skeleton></app-skeleton>
+      </mat-card-title>
+      <mat-card-content>
+        <app-skeleton [count]="10"></app-skeleton>
+      </mat-card-content>
+      <mat-card-actions>
+        <app-skeleton></app-skeleton>
+      </mat-card-actions>
+    </mat-card>
   </ng-template>
-
-</div>
+</main>

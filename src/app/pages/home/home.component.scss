@@ -1,23 +1,8 @@
-// Known Angular bug: the '!important' CSS property will not be applied when using [ngStyle] or [style.xxx]
-// https://github.com/angular/angular/issues/12009
-// Workaround: use a class containing this single style. Remember to update the SCSS classes whenever the gutters are updated.
-
-.container-margin-xs {
-  margin-left: 10px !important;
-}
-
-.container-margin-sm {
-  margin-left: 15px !important;
-}
-
-.container-margin-md {
-  margin-left: 20px !important;
-}
-
-.container-margin-lg {
-  margin-left: 24px !important;
-}
-
-.container-margin-xl {
-  margin-left: 24px !important;
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
+  grid-gap: 1rem;
+  inline-size: min(100% - 2rem, 1920px);
+  margin-inline: auto;
+  margin-block: 1rem;
 }

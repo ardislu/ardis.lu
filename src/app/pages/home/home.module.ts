@@ -7,7 +7,6 @@ import { DialogModule } from '../../components/dialog/dialog.module';
 
 import { LoaderModule } from 'src/app/components/loader/loader.module';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,7 +19,6 @@ import { MatIconModule } from '@angular/material/icon';
     HomeRoutingModule,
     DialogModule,
     LoaderModule,
-    FlexLayoutModule,
     LayoutModule,
     MatCardModule,
     MatButtonModule,
