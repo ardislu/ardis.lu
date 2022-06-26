@@ -8,11 +8,8 @@
         <mat-card-title>
           <div>{{ project.title }}</div>
         </mat-card-title>
-        <mat-card-content fxHide.xs>
+        <mat-card-content>
           {{ project.description }}
-        </mat-card-content>
-        <mat-card-content fxHide fxShow.xs>
-          {{ project.tags.join(', ') }}
         </mat-card-content>
         <mat-card-actions>
           <button mat-button color="accent" (click)="openProject(project.route)">
