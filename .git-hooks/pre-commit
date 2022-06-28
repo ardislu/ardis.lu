@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 root="$(git rev-parse --show-toplevel)" # Full file path to the directory where this git repo sits
 cd "$root" # Required to make the relative file paths to eslint and stylelint work
