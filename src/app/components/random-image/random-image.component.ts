@@ -1,6 +1,9 @@
 import { Component, OnInit, OnChanges, Input, ViewChild, ElementRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'app-random-image',
   templateUrl: './random-image.component.html',
   styleUrls: ['./random-image.component.scss']

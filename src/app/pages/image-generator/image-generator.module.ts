@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 
-import { RandomImageModule } from '../../components/random-image/random-image.module';
+import { RandomImageComponent } from '../../components/random-image/random-image.component';
 
 @NgModule({
   declarations: [ImageGeneratorComponent],
@@ -26,7 +26,7 @@ import { RandomImageModule } from '../../components/random-image/random-image.mo
     MatInputModule,
     MatIconModule,
     MatDividerModule,
-    RandomImageModule
+    RandomImageComponent
   ]
 })
 export class ImageGeneratorModule { }
