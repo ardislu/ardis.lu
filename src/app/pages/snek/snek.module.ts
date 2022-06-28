@@ -7,7 +7,7 @@ import { SnekComponent } from './snek.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 
-import { SnakeGameModule } from '../../components/snake-game/snake-game.module';
+import { SnakeGameComponent } from '../../components/snake-game/snake-game.component';
 
 @NgModule({
   declarations: [SnekComponent],
@@ -16,7 +16,7 @@ import { SnakeGameModule } from '../../components/snake-game/snake-game.module';
     SnekRoutingModule,
     MatCardModule,
     MatButtonModule,
-    SnakeGameModule
+    SnakeGameComponent
   ]
 })
 export class SnekModule { }
