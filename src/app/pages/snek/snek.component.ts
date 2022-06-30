@@ -1,7 +1,19 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 import { SnakeGameComponent } from 'src/app/components/snake-game/snake-game.component';
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatCardModule,
+    MatButtonModule,
+    SnakeGameComponent
+  ],
   selector: 'app-snek',
   templateUrl: './snek.component.html',
   styleUrls: ['./snek.component.scss']
