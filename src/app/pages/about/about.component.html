@@ -1,5 +1,5 @@
 <!-- Fetch About info from CMS -->
-<ng-container *ngIf="aboutCard$ | async as aboutCard; else loading">
+<ng-container *ngIf="about.list() | async as aboutCard; else loading">
   <mat-card class="about-card">
     <mat-card-header>
       <mat-icon mat-card-avatar svgIcon="logo"></mat-icon>
@@ -19,7 +19,7 @@
       </a>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button color="accent" (click)="goBack()">BACK</button>
+      <button mat-button color="accent" (click)="location.back()">BACK</button>
       <button mat-button color="accent" routerLink="/">HOME</button>
     </mat-card-actions>
   </mat-card>

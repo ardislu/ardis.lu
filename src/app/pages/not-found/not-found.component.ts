@@ -11,16 +11,12 @@ import Fuse from 'fuse.js';
 export class NotFoundComponent implements OnInit {
   public path = '';
 
-  constructor(private location: Location, private router: Router) { }
+  constructor(public location: Location, private router: Router) { }
 
   ngOnInit(): void {
     const currentPath = window.location.pathname;
     const allPaths = this.router.config.map(r => r.path);
     const fuse = new Fuse(allPaths); // Fuzzy matcher
     this.path = fuse.search(currentPath)?.[0]?.item ?? '';
-  }
-
-  goBack() {
-    this.location.back();
   }
 }
