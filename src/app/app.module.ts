@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderModule } from './components/header/header.module';
+import { HeaderComponent } from './components/header/header.component';
 
 // Common (only import once)
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
@@ -22,7 +22,7 @@ import { environment } from '../environments/environment';
     AppComponent
   ],
   imports: [
-    HeaderModule,
+    HeaderComponent,
     BrowserModule,
     HammerModule,
     BrowserAnimationsModule,
