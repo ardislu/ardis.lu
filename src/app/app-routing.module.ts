@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'bfi', loadComponent: () => import('./pages/bfi/bfi.component').then(m => m.BfiComponent) },
   { path: 'snek', loadComponent: () => import('./pages/snek/snek.component').then(m => m.SnekComponent) },
   { path: 'colab-hosting', loadChildren: () => import('./pages/colab-hosting/colab-hosting.module').then(m => m.ColabHostingModule) },
-  { path: '**', pathMatch: 'full', loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule) }
+  { path: '**', pathMatch: 'full', loadComponent: () => import('./pages/not-found/not-found.component').then(m => m.NotFoundComponent) }
 ];
 /* eslint-enable max-len */
 
