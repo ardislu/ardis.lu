@@ -1,8 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { RandomImageComponent } from '../../components/random-image/random-image.component';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatDividerModule,
+    RandomImageComponent
+  ],
   selector: 'app-image-generator',
   templateUrl: './image-generator.component.html',
   styleUrls: ['./image-generator.component.scss']
