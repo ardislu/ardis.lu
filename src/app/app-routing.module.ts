@@ -4,8 +4,8 @@ import { AuthGuard } from './guards/auth.guard';
 
 /* eslint-disable max-len */
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
+  { path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
+  { path: 'home', redirectTo: '', pathMatch: 'full' },
   { path: 'settings', loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsModule), canActivate: [AuthGuard] },
   { path: 'about', loadChildren: () => import('./pages/about/about.module').then(m => m.AboutModule) },
   { path: 'image-generator', loadChildren: () => import('./pages/image-generator/image-generator.module').then(m => m.ImageGeneratorModule) },
