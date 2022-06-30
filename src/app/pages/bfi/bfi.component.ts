@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { BfService } from '../../services/bf.service';
 
 @Component({
