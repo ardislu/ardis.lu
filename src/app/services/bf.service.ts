@@ -10,9 +10,6 @@ export class BfService {
 
   private readonly tapeSize = 1000;
 
-  constructor() {
-  }
-
   get output(): string {
     return this._output;
   }

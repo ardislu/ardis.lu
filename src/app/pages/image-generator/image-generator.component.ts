@@ -13,9 +13,6 @@ export class ImageGeneratorComponent implements OnInit {
   public length = 800;
   public inputChanged: Subject<void | string> = new Subject<void | string>();
 
-  constructor() {
-  }
-
   ngOnInit(): void {
     // Set a 300 ms wait time between input events before proceeding
     this.inputChanged.pipe(debounceTime(300)).subscribe(() => this.seed = this.inputValue);

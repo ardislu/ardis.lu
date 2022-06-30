@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -13,11 +13,6 @@ export interface NotificationDialogData {
   templateUrl: './notification-dialog.component.html',
   styleUrls: ['./notification-dialog.component.scss']
 })
-export class NotificationDialogComponent implements OnInit {
-
+export class NotificationDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: NotificationDialogData) { }
-
-  ngOnInit(): void {
-  }
-
 }

@@ -1,16 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-skeleton',
   templateUrl: './skeleton.component.html',
   styleUrls: ['./skeleton.component.scss']
 })
-export class SkeletonComponent implements OnInit {
+export class SkeletonComponent {
   @Input() count = 1;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

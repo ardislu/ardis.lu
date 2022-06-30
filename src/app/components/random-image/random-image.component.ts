@@ -15,8 +15,6 @@ export class RandomImageComponent implements OnInit, OnChanges {
   @Input() height = 300;
   @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
 
-  constructor() { }
-
   ngOnInit(): void {
     this.generateImage();
   }

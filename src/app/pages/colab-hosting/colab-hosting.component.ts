@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { BostonParameters, BostonPrediction } from '../../models/colab-hosting.model';
 import { ColabHostingService } from '../../services/colab-hosting.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './colab-hosting.component.html',
   styleUrls: ['./colab-hosting.component.scss']
 })
-export class ColabHostingComponent implements OnInit {
+export class ColabHostingComponent {
   // Basic form controls
   public colabHost = ''; // ngrok URL taken from Colab notebook instance
   public selectedType: 'average' | 'premium' | 'custom' = 'average';
@@ -46,9 +46,6 @@ export class ColabHostingComponent implements OnInit {
   ];
 
   constructor(private colab: ColabHostingService, private dialog: MatDialog) { }
-
-  ngOnInit(): void {
-  }
 
   // Force https:// on ngrok URL
   setColabHost(e: Event): void {

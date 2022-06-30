@@ -21,8 +21,6 @@ export class SnekComponent implements OnInit {
   public highScore = 0;
   /* eslint-enable @typescript-eslint/member-ordering */
 
-  constructor() { }
-
   ngOnInit(): void {
     this.actualWidth = Math.min(window.innerWidth * 0.7, 1080);
     this.actualHeight = Math.min(window.innerHeight * 0.35, 1080);

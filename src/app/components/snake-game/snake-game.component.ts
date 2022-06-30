@@ -28,8 +28,6 @@ export class SnakeGameComponent implements OnInit {
   private gameLoop!: number;
   private gameOverTimer!: number;
 
-  constructor() { }
-
   ngOnInit(): void {
     this.canvas.nativeElement.width = this.width * this.gridSize;
     this.canvas.nativeElement.height = this.height * this.gridSize;
