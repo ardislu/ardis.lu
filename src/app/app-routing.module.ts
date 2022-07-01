@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'image-generator', loadComponent: () => import('./pages/image-generator/image-generator.component').then(m => m.ImageGeneratorComponent) },
   { path: 'bfi', loadComponent: () => import('./pages/bfi/bfi.component').then(m => m.BfiComponent) },
   { path: 'snek', loadComponent: () => import('./pages/snek/snek.component').then(m => m.SnekComponent) },
-  { path: 'colab-hosting', loadChildren: () => import('./pages/colab-hosting/colab-hosting.module').then(m => m.ColabHostingModule) },
+  { path: 'colab-hosting', loadComponent: () => import('./pages/colab-hosting/colab-hosting.component').then(m => m.ColabHostingComponent) },
   { path: '**', pathMatch: 'full', loadComponent: () => import('./pages/not-found/not-found.component').then(m => m.NotFoundComponent) }
 ];
 /* eslint-enable max-len */

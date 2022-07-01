@@ -1,4 +1,18 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DialogModule } from '../../components/dialog/dialog.module';
 import { BostonParameters, BostonPrediction } from '../../models/colab-hosting.model';
 import { ColabHostingService } from '../../services/colab-hosting.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,6 +22,23 @@ import { catchError, tap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    DialogModule
+  ],
   selector: 'app-colab-hosting',
   templateUrl: './colab-hosting.component.html',
   styleUrls: ['./colab-hosting.component.scss']
