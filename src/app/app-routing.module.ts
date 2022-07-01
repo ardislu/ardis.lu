@@ -6,7 +6,7 @@ import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
   { path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
   { path: 'home', redirectTo: '', pathMatch: 'full' },
-  { path: 'settings', loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsModule), canActivate: [AuthGuard] },
+  { path: 'settings', loadComponent: () => import('./pages/settings/settings.component').then(m => m.SettingsComponent), canActivate: [AuthGuard] },
   { path: 'about', loadComponent: () => import('./pages/about/about.component').then(m => m.AboutComponent) },
   { path: 'image-generator', loadComponent: () => import('./pages/image-generator/image-generator.component').then(m => m.ImageGeneratorComponent) },
   { path: 'bfi', loadComponent: () => import('./pages/bfi/bfi.component').then(m => m.BfiComponent) },
