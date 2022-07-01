@@ -1,12 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { DialogModule } from '../../components/dialog/dialog.module';
+import { LoaderModule } from '../../components/loader/loader.module';
 import { ProjectCard } from '../../models/project.model';
 import { ProjectCardService } from '../../services/strapi.service';
-import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { NotificationDialogComponent, NotificationDialogData } from '../../components/dialog/notification/notification-dialog.component';
 import { Observable } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    LayoutModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    DialogModule,
+    LoaderModule
+  ],
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']

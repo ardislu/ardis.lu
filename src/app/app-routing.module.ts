@@ -4,7 +4,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 /* eslint-disable max-len */
 const routes: Routes = [
-  { path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
+  { path: '', loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent) },
   { path: 'home', redirectTo: '', pathMatch: 'full' },
   { path: 'settings', loadComponent: () => import('./pages/settings/settings.component').then(m => m.SettingsComponent), canActivate: [AuthGuard] },
   { path: 'about', loadComponent: () => import('./pages/about/about.component').then(m => m.AboutComponent) },
