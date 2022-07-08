@@ -4,7 +4,10 @@
   "newProjectRoot": "projects",
   "projects": {
     "ardis-lu-frontend": {
+      "root": "",
+      "sourceRoot": "src",
       "projectType": "application",
+      "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss",
@@ -32,9 +35,6 @@
           "skipTests": true
         }
       },
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
