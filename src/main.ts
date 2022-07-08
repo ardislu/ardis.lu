@@ -1,7 +1,6 @@
 import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { bootstrapApplication, BrowserModule, HammerModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app/app.component';
@@ -34,7 +33,6 @@ bootstrapApplication(AppComponent, {
       RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled', preloadingStrategy: PreloadAllModules }),
       BrowserModule,
       HammerModule,
-      BrowserAnimationsModule,
       ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
       HttpClientModule
     )
