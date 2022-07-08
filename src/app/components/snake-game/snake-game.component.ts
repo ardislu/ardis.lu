@@ -27,6 +27,12 @@ export class SnakeGameComponent implements OnInit {
   private previousRender!: number;
   private gameLoop!: number;
   private gameOverTimer!: number;
+  private touchStartTime!: number;
+  private touchStartX!: number;
+  private touchStartY!: number;
+  private touchEndTime!: number;
+  private touchEndX!: number;
+  private touchEndY!: number;
 
   ngOnInit(): void {
     this.canvas.nativeElement.width = this.width * this.gridSize;
@@ -184,27 +190,34 @@ export class SnakeGameComponent implements OnInit {
     this.changeDirection(xInput, yInput);
   }
 
-  onPan(event: any): void {
-    let xInput: -1 | 0 | 1 = 0;
-    let yInput: -1 | 0 | 1 = 0;
-    switch (event.additionalEvent) {
-      case 'panright':
-        xInput = 1;
-        break;
-      case 'panleft':
-        xInput = -1;
-        break;
-      case 'panup':
-        yInput = -1;
-        break;
-      case 'pandown':
-        yInput = 1;
-        break;
-      default:
-        xInput = 0;
-        yInput = 0;
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  @HostListener('touchstart', ['$event'])
+  startSwipe(event: TouchEvent): void {
+    this.touchStartTime = Date.now();
+    this.touchStartX = event.changedTouches[0].screenX;
+    this.touchStartY = event.changedTouches[0].screenY;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  @HostListener('touchend', ['$event'])
+  endSwipe(event: TouchEvent): void {
+    this.touchEndTime = Date.now();
+    this.touchEndX = event.changedTouches[0].screenX;
+    this.touchEndY = event.changedTouches[0].screenY;
+
+    // Ignore touches that were held for longer than 250 ms (quick swipes only)
+    if (this.touchEndTime - this.touchStartTime > 250) {
+      return;
     }
-    this.changeDirection(xInput, yInput);
+
+    const xChange = this.touchEndX - this.touchStartX;
+    const yChange = this.touchEndY - this.touchStartY;
+    if (Math.abs(xChange) > Math.abs(yChange)) {
+      this.changeDirection((Math.sign(xChange) as -1 | 0 | 1), 0);
+    }
+    else {
+      this.changeDirection(0, (Math.sign(yChange) as -1 | 0 | 1));
+    }
   }
 
   changeDirection(xChange: -1 | 0 | 1, yChange: -1 | 0 | 1): void {

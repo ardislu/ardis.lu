@@ -1,13 +1,11 @@
 import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import { bootstrapApplication, BrowserModule, HammerModule } from '@angular/platform-browser';
+import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app/app.component';
 import { AuthGuard } from './app/guards/auth.guard';
 import { environment } from './environments/environment';
-
-import 'hammerjs';
 
 if (environment.production) {
   enableProdMode();
@@ -32,7 +30,6 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(
       RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled', preloadingStrategy: PreloadAllModules }),
       BrowserModule,
-      HammerModule,
       ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
       HttpClientModule
     )
