@@ -5,26 +5,14 @@
 This project contains the Angular codebase for my personal website
 [ardis.lu](https://ardis.lu).
 
-# Quickstart
+# Requirements
 
-## Requirements
-
-- (Optional) [Chocolatey](https://chocolatey.org/)
 - [Node.js](https://nodejs.org/)
 - [git](https://gitforwindows.org/)
 
-You can install Node.js and git from their respective websites, or use
-Chocolatey to install them from Powershell:
+# Setup
 
-```
-choco install nodejs
-choco install git
-```
-
-## Setup
-
-1. Install Angular CLI globally (not actually required but a good idea for
-   future Angular projects)
+1. Install the Angular CLI globally
 
 ```
 npm install -g @angular/cli
@@ -42,45 +30,13 @@ git clone https://github.com/ardislu/ardis.lu.git
 npm i
 ```
 
-4. Initiate a development server
+4. Build the project and start a development web server
 
 ```
-ng serve
+npm run start
 ```
 
-5. Go to the [development server](http://localhost:4200/) in your browser
-
-# Testing on other devices
-
-To connect to the development server from other devices, initiate the
-development server on all IP addresses on the local machine:
-
-```
-ng serve --host 0.0.0.0
-```
-
-Then get your local IP address from Powershell:
-
-```
-ipconfig
-```
-
-Now you can connect to the development server from any device on the local
-network (e.g. your phone or tablet). For example, if my local IP address is
-`192.168.1.21`, go to this address from the phone or tablet's internet browser:
-
-```
-192.168.1.21:4200
-```
-
-# Web server configuration
-
-For Angular apps using HTML5 URLs (i.e. URLs that look like separate pages but
-are actually not), we need to
-[configure the web server to fallback to index.html](https://angular.io/guide/deployment#server-configuration).
-
-If you use `npm start` or `npm run stage` to host a development web server, the
-development web server is already configured to redirect as required.
+5. Go to the [development server](http://localhost:4200/) in a web browser
 
 # Pre-commit hook
 
