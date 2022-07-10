@@ -16,8 +16,39 @@ import Fuse from 'fuse.js';
     MatIconModule
   ],
   selector: 'app-not-found',
-  templateUrl: './not-found.component.html',
-  styleUrls: ['./not-found.component.scss']
+  template: `
+    <mat-card class="not-found-card">
+      <mat-card-header>
+        <mat-icon mat-card-avatar svgIcon="logo"></mat-icon>
+        <mat-card-title>
+          404
+        </mat-card-title>
+        <mat-card-subtitle>
+          Page not found.
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p *ngIf="path; else noSuggestion">
+          Did you mean <a [routerLink]="['/' + path]">{{ path }}</a>?
+        </p>
+        <ng-template #noSuggestion>
+          <p>
+            Use the buttons below to return to safety.
+          </p>
+        </ng-template>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="accent" (click)="location.back()">BACK</button>
+        <button mat-button color="accent" routerLink="/">HOME</button>
+      </mat-card-actions>
+    </mat-card>
+  `,
+  styles: [`
+    .not-found-card {
+      width: min(70%, 40em);
+      margin: min(10%, 5em) auto;
+    }
+  `]
 })
 export class NotFoundComponent implements OnInit {
   public path = '';
