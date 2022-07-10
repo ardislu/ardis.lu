@@ -33,7 +33,7 @@ npm install -g @angular/cli
 2. Clone the repository
 
 ```
-git clone https://github.com/ardislu/ardislu.github.io.git
+git clone https://github.com/ardislu/ardis.lu.git
 ```
 
 3. Install project dependencies
