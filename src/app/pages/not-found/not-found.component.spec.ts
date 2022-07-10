@@ -1,7 +1,6 @@
 import { Spectator, createComponentFactory } from '@ngneat/spectator/jest';
 
 import { NotFoundComponent } from './not-found.component';
-import { NotFoundModule } from './not-found.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 
@@ -10,7 +9,6 @@ describe('NotFoundComponent', () => {
   const createComponent = createComponentFactory({
     component: NotFoundComponent,
     imports: [
-      NotFoundModule,
       RouterTestingModule,
       MatIconTestingModule
     ],
