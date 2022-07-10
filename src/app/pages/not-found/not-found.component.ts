@@ -25,9 +25,8 @@ export class NotFoundComponent implements OnInit {
   constructor(public location: Location, private router: Router) { }
 
   ngOnInit(): void {
-    const currentPath = window.location.pathname;
     const allPaths = this.router.config.map(r => r.path);
     const fuse = new Fuse(allPaths); // Fuzzy matcher
-    this.path = fuse.search(currentPath)?.[0]?.item ?? '';
+    this.path = fuse.search(location.pathname)?.[0]?.item ?? '';
   }
 }
