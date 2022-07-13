@@ -14,15 +14,15 @@ if (environment.production) {
 
 /* eslint-disable max-len */
 const routes: Routes = [
-  { path: '', loadComponent: () => import('@pages/home/home.component').then(m => m.HomeComponent) },
+  { path: '', loadComponent: () => import('@pages/home.component').then(m => m.HomeComponent) },
   { path: 'home', redirectTo: '', pathMatch: 'full' },
-  { path: 'settings', loadComponent: () => import('@pages/settings/settings.component').then(m => m.SettingsComponent), canActivate: [AuthGuard] },
-  { path: 'about', loadComponent: () => import('@pages/about/about.component').then(m => m.AboutComponent) },
-  { path: 'image-generator', loadComponent: () => import('@pages/image-generator/image-generator.component').then(m => m.ImageGeneratorComponent) },
-  { path: 'bfi', loadComponent: () => import('@pages/bfi/bfi.component').then(m => m.BfiComponent) },
-  { path: 'snek', loadComponent: () => import('@pages/snek/snek.component').then(m => m.SnekComponent) },
-  { path: 'colab-hosting', loadComponent: () => import('@pages/colab-hosting/colab-hosting.component').then(m => m.ColabHostingComponent) },
-  { path: '**', pathMatch: 'full', loadComponent: () => import('@pages/not-found/not-found.component').then(m => m.NotFoundComponent) }
+  { path: 'settings', loadComponent: () => import('@pages/settings.component').then(m => m.SettingsComponent), canActivate: [AuthGuard] },
+  { path: 'about', loadComponent: () => import('@pages/about.component').then(m => m.AboutComponent) },
+  { path: 'image-generator', loadComponent: () => import('@pages/image-generator.component').then(m => m.ImageGeneratorComponent) },
+  { path: 'bfi', loadComponent: () => import('@pages/bfi.component').then(m => m.BfiComponent) },
+  { path: 'snek', loadComponent: () => import('@pages/snek.component').then(m => m.SnekComponent) },
+  { path: 'colab-hosting', loadComponent: () => import('@pages/colab-hosting.component').then(m => m.ColabHostingComponent) },
+  { path: '**', pathMatch: 'full', loadComponent: () => import('@pages/not-found.component').then(m => m.NotFoundComponent) }
 ];
 /* eslint-enable max-len */
 
