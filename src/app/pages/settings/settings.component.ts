@@ -8,7 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { DialogModule } from '../../components/dialog/dialog.module';
-import { LoaderModule } from '../../components/loader/loader.module';
+import { SkeletonLoaderComponent } from '../../components/skeleton-loader/skeleton-loader.component';
 import { AuthService } from '../../services/auth.service';
 import { ThemeService } from '../../services/theme.service';
 import { BaseTheme } from '../../models/theme.model';
@@ -29,7 +29,7 @@ import { ConfirmationDialogData, ConfirmationDialogComponent } from '../../compo
     MatFormFieldModule,
     MatSelectModule,
     DialogModule,
-    LoaderModule
+    SkeletonLoaderComponent
   ],
   selector: 'app-settings',
   templateUrl: './settings.component.html',

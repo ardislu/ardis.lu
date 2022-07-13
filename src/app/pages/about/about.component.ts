@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { LoaderModule } from '../../components/loader/loader.module';
+import { SkeletonLoaderComponent } from '../../components/skeleton-loader/skeleton-loader.component';
 import { AboutCardService } from '../../services/strapi.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { AboutCardService } from '../../services/strapi.service';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    LoaderModule
+    SkeletonLoaderComponent
   ],
   selector: 'app-about',
   templateUrl: './about.component.html',

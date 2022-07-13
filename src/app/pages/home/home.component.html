@@ -20,13 +20,13 @@
   <ng-template #loading>
     <mat-card *ngFor="let num of placeholderCards">
       <mat-card-title>
-        <app-skeleton></app-skeleton>
+        <app-skeleton-loader></app-skeleton-loader>
       </mat-card-title>
       <mat-card-content>
-        <app-skeleton [count]="10"></app-skeleton>
+        <app-skeleton-loader [count]="10"></app-skeleton-loader>
       </mat-card-content>
       <mat-card-actions>
-        <app-skeleton></app-skeleton>
+        <app-skeleton-loader></app-skeleton-loader>
       </mat-card-actions>
     </mat-card>
   </ng-template>

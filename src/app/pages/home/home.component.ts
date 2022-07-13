@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { DialogModule } from '../../components/dialog/dialog.module';
-import { LoaderModule } from '../../components/loader/loader.module';
+import { SkeletonLoaderComponent } from '../../components/skeleton-loader/skeleton-loader.component';
 import { ProjectCard } from '../../models/project.model';
 import { ProjectCardService } from '../../services/strapi.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -23,7 +23,7 @@ import { Observable } from 'rxjs';
     MatButtonModule,
     MatIconModule,
     DialogModule,
-    LoaderModule
+    SkeletonLoaderComponent
   ],
   selector: 'app-home',
   templateUrl: './home.component.html',
