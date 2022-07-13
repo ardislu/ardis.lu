@@ -5,12 +5,11 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { DialogModule } from '../../components/dialog/dialog.module';
 import { SkeletonLoaderComponent } from '../../components/skeleton-loader/skeleton-loader.component';
 import { ProjectCard } from '../../models/project.model';
 import { ProjectCardService } from '../../services/strapi.service';
-import { MatDialog } from '@angular/material/dialog';
-import { NotificationDialogComponent, NotificationDialogData } from '../../components/dialog/notification/notification-dialog.component';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { NotificationDialogComponent, NotificationDialogData } from '../../components/notification-dialog/notification-dialog.component';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -22,7 +21,7 @@ import { Observable } from 'rxjs';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    DialogModule,
+    MatDialogModule,
     SkeletonLoaderComponent
   ],
   selector: 'app-home',

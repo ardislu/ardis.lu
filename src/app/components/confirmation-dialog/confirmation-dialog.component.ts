@@ -1,4 +1,7 @@
 import { Component, Inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -10,9 +13,26 @@ export interface ConfirmationDialogData {
 }
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule
+  ],
   selector: 'app-confirmation-dialog',
-  templateUrl: './confirmation-dialog.component.html',
-  styleUrls: ['./confirmation-dialog.component.scss']
+  template: `
+    <h2 mat-dialog-title *ngIf="data.title">{{ data.title }}</h2>
+
+    <mat-dialog-content>
+      {{ data.body }}
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button mat-button [mat-dialog-close]="false" color="accent">{{ data.rejectButtonText }}</button>
+      <button mat-button [mat-dialog-close]="true" color="warn">{{ data.confirmButtonText }}</button>
+    </mat-dialog-actions>
+  `,
+  styles: ['']
 })
 export class ConfirmationDialogComponent {
   constructor(private dialogRef: MatDialogRef<ConfirmationDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: ConfirmationDialogData) {

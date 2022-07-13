@@ -12,11 +12,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { DialogModule } from '../../components/dialog/dialog.module';
 import { BostonParameters, BostonPrediction } from '../../models/colab-hosting.model';
 import { ColabHostingService } from '../../services/colab-hosting.service';
-import { MatDialog } from '@angular/material/dialog';
-import { NotificationDialogComponent, NotificationDialogData } from '../../components/dialog/notification/notification-dialog.component';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { NotificationDialogComponent, NotificationDialogData } from '../../components/notification-dialog/notification-dialog.component';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -36,8 +35,8 @@ import { HttpErrorResponse } from '@angular/common/http';
     MatDividerModule,
     MatExpansionModule,
     MatSelectModule,
-    MatProgressSpinnerModule,
-    DialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   selector: 'app-colab-hosting',
   templateUrl: './colab-hosting.component.html',
