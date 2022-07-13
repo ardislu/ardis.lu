@@ -46,10 +46,11 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.svg",
-              "src/apple-touch-icon.png",
-              "src/assets",
-              "src/manifest.webmanifest"
+              {
+                "glob": "**/*",
+                "input": "src/assets/",
+                "output": "/"
+              }
             ],
             "styles": [
               {
