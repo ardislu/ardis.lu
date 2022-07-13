@@ -20,13 +20,13 @@ import { ThemeService } from '@services/theme.service';
 })
 export class AppComponent {
   constructor(private theme: ThemeService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-    iconRegistry.addSvgIcon('logo', sanitizer.bypassSecurityTrustResourceUrl('../assets/logo.svg'));
-    iconRegistry.addSvgIcon('login', sanitizer.bypassSecurityTrustResourceUrl('../assets/login.svg'));
-    iconRegistry.addSvgIcon('settings', sanitizer.bypassSecurityTrustResourceUrl('../assets/settings.svg'));
-    iconRegistry.addSvgIcon('info', sanitizer.bypassSecurityTrustResourceUrl('../assets/info.svg'));
-    iconRegistry.addSvgIcon('github', sanitizer.bypassSecurityTrustResourceUrl('../assets/github.svg'));
-    iconRegistry.addSvgIcon('keyboard_arrow_right', sanitizer.bypassSecurityTrustResourceUrl('../assets/keyboard_arrow_right.svg'));
-    iconRegistry.addSvgIcon('dice', sanitizer.bypassSecurityTrustResourceUrl('../assets/dice.svg'));
-    iconRegistry.addSvgIcon('launch', sanitizer.bypassSecurityTrustResourceUrl('../assets/launch.svg'));
+    iconRegistry.addSvgIcon('logo', sanitizer.bypassSecurityTrustResourceUrl('/logo.svg'));
+    iconRegistry.addSvgIcon('login', sanitizer.bypassSecurityTrustResourceUrl('/login.svg'));
+    iconRegistry.addSvgIcon('settings', sanitizer.bypassSecurityTrustResourceUrl('/settings.svg'));
+    iconRegistry.addSvgIcon('info', sanitizer.bypassSecurityTrustResourceUrl('/info.svg'));
+    iconRegistry.addSvgIcon('github', sanitizer.bypassSecurityTrustResourceUrl('/github.svg'));
+    iconRegistry.addSvgIcon('keyboard_arrow_right', sanitizer.bypassSecurityTrustResourceUrl('/keyboard_arrow_right.svg'));
+    iconRegistry.addSvgIcon('dice', sanitizer.bypassSecurityTrustResourceUrl('/dice.svg'));
+    iconRegistry.addSvgIcon('launch', sanitizer.bypassSecurityTrustResourceUrl('/launch.svg'));
   }
 }
