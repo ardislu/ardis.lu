@@ -17,12 +17,10 @@ import { AuthService } from '@services/auth.service';
   ],
   selector: 'app-header',
   template: `
-    <!-- Toolbar -->
-    <mat-toolbar aria-label="Header" class="header">
+    <mat-toolbar aria-label="Header">
       <a aria-label="Home" routerLink="" mat-icon-button>
         <mat-icon svgIcon="logo"></mat-icon>
       </a>
-      <div class="fill-space"></div>
       <button aria-label="Login" mat-icon-button (click)="auth.login()" *ngIf="!auth.loggedIn">
         <mat-icon svgIcon="login"></mat-icon>
       </button>
@@ -33,28 +31,15 @@ import { AuthService } from '@services/auth.service';
         <mat-icon svgIcon="info"></mat-icon>
       </button>
     </mat-toolbar>
-
-    <!-- Intentionally blank, to give spacing since the header is fixed -->
-    <div class="false-header mat-app-background"></div>
   `,
   styles: [`
-    .header {
-      padding-top: env(safe-area-inset-top); // Fill top status bar for iOS
-      height: calc(44px + env(safe-area-inset-top));
-      padding-left: 16px;
-      padding-right: 16px;
-      position: fixed;
+    mat-toolbar {
       display: flex;
-      box-sizing: border-box;
-      align-items: center;
-      z-index: 1000;
+      justify-content: flex-end;
     }
 
-    .false-header {
-      padding-top: env(safe-area-inset-top);
-      height: calc(44px + env(safe-area-inset-top));
-      z-index: 0;
-      position: relative;
+    a {
+      margin-inline-end: auto;
     }
   `]
 })

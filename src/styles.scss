@@ -39,10 +39,3 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   appearance: textfield;
 }
-
-/* Global utility classes */
-// This fills the remaining space, by using flexbox.
-// Every toolbar row uses a flexbox row layout.
-.fill-space {
-  flex: 1 1 auto;
-}
