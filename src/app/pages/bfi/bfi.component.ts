@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { BfService } from '../../services/bf.service';
+import { BfService } from '@services/bf.service';
 
 @Component({
   standalone: true,

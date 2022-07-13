@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SnekPiece, SnekPlayer } from '../models/snek.model';
+import { SnekPiece, SnekPlayer } from '@models/snek.model';
 
 @Component({
   standalone: true,

@@ -7,14 +7,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { SkeletonLoaderComponent } from '../../components/skeleton-loader.component';
-import { AuthService } from '../../services/auth.service';
-import { ThemeService } from '../../services/theme.service';
-import { BaseTheme } from '../../models/theme.model';
+import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
+import { AuthService } from '@services/auth.service';
+import { ThemeService } from '@services/theme.service';
+import { BaseTheme } from '@models/theme.model';
 
 import { Observable } from 'rxjs';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
-import { ConfirmationDialogData, ConfirmationDialogComponent } from '../../components/confirmation-dialog.component';
+import { ConfirmationDialogData, ConfirmationDialogComponent } from '@components/confirmation-dialog.component';
 
 @Component({
   standalone: true,

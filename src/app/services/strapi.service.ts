@@ -3,10 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
-import { environment } from '../../environments/environment';
-import { Adapter } from '../models/adapter.model';
-import { ProjectCard } from '../models/project.model';
-import { AboutCard } from '../models/about.model';
+import { environment } from '@environment';
+import { Adapter } from '@models/adapter.model';
+import { ProjectCard } from '@models/project.model';
+import { AboutCard } from '@models/about.model';
 
 @Injectable({
   providedIn: 'root'

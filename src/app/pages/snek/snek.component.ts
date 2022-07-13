@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { SnakeGameComponent } from 'src/app/components/snake-game.component';
+import { SnakeGameComponent } from '@components/snake-game.component';
 
 @Component({
   standalone: true,

@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
-import { HeaderComponent } from './components/header.component';
-import { ThemeService } from './services/theme.service';
+import { HeaderComponent } from '@components/header.component';
+import { ThemeService } from '@services/theme.service';
 
 @Component({
   standalone: true,

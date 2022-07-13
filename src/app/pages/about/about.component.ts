@@ -4,8 +4,8 @@ import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { SkeletonLoaderComponent } from '../../components/skeleton-loader.component';
-import { AboutCardService } from '../../services/strapi.service';
+import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
+import { AboutCardService } from '@services/strapi.service';
 
 @Component({
   standalone: true,
