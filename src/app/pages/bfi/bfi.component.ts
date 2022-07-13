@@ -22,8 +22,64 @@ import { BfService } from '@services/bf.service';
     MatInputModule
   ],
   selector: 'app-bfi',
-  templateUrl: './bfi.component.html',
-  styleUrls: ['./bfi.component.scss']
+  template: `
+    <mat-card class="bfi-card">
+      <mat-card-header>
+        <mat-card-title>
+          bf-interpreter
+        </mat-card-title>
+        <mat-card-subtitle>
+          Turing-complete!
+          <a target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Brainfuck">
+            <mat-icon svgIcon="launch" class="subtitle-link"></mat-icon>
+          </a>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-form-field class="text-block">
+          <mat-label>Input</mat-label>
+          <textarea matInput cdkTextareaAutosize [(ngModel)]="bf.input"></textarea>
+        </mat-form-field>
+      </mat-card-content>
+
+      <mat-card-content>
+        <mat-form-field class="text-block">
+          <mat-label>Script</mat-label>
+          <textarea matInput cdkTextareaAutosize [(ngModel)]="bf.script"></textarea>
+        </mat-form-field>
+      </mat-card-content>
+
+      <mat-card-content>
+        <mat-form-field class="text-block">
+          <mat-label>Output</mat-label>
+          <textarea matInput cdkTextareaAutosize disabled [value]="output"></textarea>
+        </mat-form-field>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="execute()">
+          RUN SCRIPT
+        </button>
+        <button mat-button color="accent" routerLink="/">HOME</button>
+      </mat-card-actions>
+    </mat-card>
+  `,
+  styles: [`
+    .bfi-card {
+      width: 85%;
+      margin: min(5%, 5em) auto;
+      white-space: pre-wrap;
+    }
+
+    .subtitle-link {
+      height: 14px;
+    }
+
+    .text-block {
+      width: 100%;
+    }
+  `]
 })
 export class BfiComponent implements OnInit {
   public output!: string;

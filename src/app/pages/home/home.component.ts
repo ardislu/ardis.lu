@@ -25,8 +25,51 @@ import { Observable } from 'rxjs';
     SkeletonLoaderComponent
   ],
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  template: `
+    <main>
+      <!-- Project cards fetched from API  -->
+      <ng-container *ngIf="projectCards$ | async as projectCards; else loading">
+        <mat-card *ngFor="let project of projectCards">
+          <mat-card-title>
+            <div>{{ project.title }}</div>
+          </mat-card-title>
+          <mat-card-content>
+            {{ project.description }}
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button color="accent" (click)="openProject(project.route)">
+              EXPLORE
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </ng-container>
+
+      <!-- Skeleton cards as placeholders while loading -->
+      <ng-template #loading>
+        <mat-card *ngFor="let num of placeholderCards">
+          <mat-card-title>
+            <app-skeleton-loader></app-skeleton-loader>
+          </mat-card-title>
+          <mat-card-content>
+            <app-skeleton-loader [count]="10"></app-skeleton-loader>
+          </mat-card-content>
+          <mat-card-actions>
+            <app-skeleton-loader></app-skeleton-loader>
+          </mat-card-actions>
+        </mat-card>
+      </ng-template>
+    </main>
+  `,
+  styles: [`
+    main {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
+      grid-gap: 1rem;
+      inline-size: min(100% - 2rem, 1920px);
+      margin-inline: auto;
+      margin-block: 1rem;
+    }
+  `]
 })
 export class HomeComponent implements OnInit {
   public projectCards$!: Observable<ProjectCard[]>;

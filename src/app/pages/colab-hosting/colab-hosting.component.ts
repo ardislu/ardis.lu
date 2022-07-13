@@ -39,8 +39,128 @@ import { HttpErrorResponse } from '@angular/common/http';
     MatProgressSpinnerModule
   ],
   selector: 'app-colab-hosting',
-  templateUrl: './colab-hosting.component.html',
-  styleUrls: ['./colab-hosting.component.scss']
+  template: `
+    <mat-card class="colab-card">
+      <mat-card-header>
+        <mat-card-title class="mat-card-header-text-margin">colab hosting</mat-card-title>
+        <mat-card-subtitle class="mat-card-header-text-margin">Complementary front-end that queries my
+          <a target="_blank" rel="noopener noreferrer"
+            href="https://colab.research.google.com/github/ardislu/colab-hosting-example/blob/main/colab-hosting-example.ipynb">Colab-based
+            machine learning backend<mat-icon svgIcon="launch" class="subtitle-link"></mat-icon>
+          </a>.
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-form-field class="text-block">
+          <mat-label>ngrok URL</mat-label>
+          <input matInput [(ngModel)]="colabHost" (change)="setColabHost($event)" type="url" pattern="(https?:\/\/)?(\w|-)+\.ngrok\.io\/?"
+            placeholder="https://xxxxxxxxxxxx.ngrok.io/" required>
+        </mat-form-field>
+
+        <mat-label>Select a home type:</mat-label>
+        <mat-radio-group aria-label="Select a home type" [value]="selectedType" (change)="setSelectedType($event.value)">
+          <mat-radio-button value="average">Average</mat-radio-button>
+          <mat-radio-button value="premium">Premium</mat-radio-button>
+          <mat-radio-button value="custom">Custom</mat-radio-button>
+        </mat-radio-group>
+
+        <ng-container *ngIf="bostonPrediction$ | async as bostonPrediction; else pricePlaceholder">
+          <h2>{{ bostonPrediction.price * 1000 | currency }}</h2>
+        </ng-container>
+
+        <mat-divider></mat-divider>
+
+        <mat-expansion-panel [(expanded)]="showAdvancedOptions" class="mat-elevation-z0">
+          <mat-expansion-panel-header>
+            <mat-panel-title>Advanced options</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-form-field class="text-block" appearance="fill">
+            <mat-label>Machine learning model</mat-label>
+            <mat-select [(ngModel)]="selectedModel" name="model">
+              <mat-option *ngFor="let model of bostonModels" [value]="model.value">
+                {{model.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="parameter-settings-group">
+            <mat-form-field class="parameter-setting" *ngFor="let item of customParams | keyvalue; trackBy: trackByNull">
+              <mat-label>{{ item.key }}</mat-label>
+              <input matInput [value]="item.value" (change)="setParam(item.key, $event)" type="number" step="0.00001">
+            </mat-form-field>
+          </div>
+
+        </mat-expansion-panel>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="getPrice()">
+          GET PRICE
+        </button>
+        <button mat-button color="accent" routerLink="/">HOME</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <ng-template #pricePlaceholder>
+      <ng-container *ngIf="showFirstContent; else loading">
+        <h2>Press GET PRICE to predict the house price!</h2>
+      </ng-container>
+    </ng-template>
+
+    <ng-template #loading>
+      <mat-spinner [diameter]="25"></mat-spinner>
+    </ng-template>
+  `,
+  styles: [`
+    .colab-card {
+      width: min(70%, 50em);
+      margin: min(10%, 5em) auto;
+      white-space: pre-wrap;
+    }
+
+    .subtitle-link {
+      height: 14px;
+    }
+
+    .text-block {
+      width: 100%;
+    }
+
+    // Offset the margin-left on .mat-card-header-text, which can't be overridden
+    // without a global !important, or a deprecated ::ng-deep
+    .mat-card-header-text-margin {
+      margin-left: -16px;
+    }
+
+    .mat-radio-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mat-radio-button {
+      margin: 5px 0;
+    }
+
+    .mat-divider {
+      z-index: 1;
+    }
+
+    .mat-expansion-panel-header {
+      margin-top: 16px;
+      padding: 16px;
+    }
+
+    .parameter-settings-group {
+      display: flex;
+      flex-flow: row wrap;
+    }
+
+    .parameter-setting {
+      width: 8em;
+      padding-right: 2%;
+    }
+  `]
 })
 export class ColabHostingComponent {
   // Basic form controls

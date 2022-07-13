@@ -15,8 +15,37 @@ import { SnakeGameComponent } from '@components/snake-game.component';
     SnakeGameComponent
   ],
   selector: 'app-snek',
-  templateUrl: './snek.component.html',
-  styleUrls: ['./snek.component.scss']
+  template: `
+    <mat-card class="snek-card">
+      <mat-card-title>
+        snek
+      </mat-card-title>
+      <mat-card-subtitle>
+        this is snek // high: {{ highScore }} // last: {{ lastScore }}
+      </mat-card-subtitle>
+
+      <mat-card-content class="canvas-container">
+        <app-snake-game #game [gridSize]="gameGrid" [width]="gameWidth" [height]="gameHeight"
+          (gameEnded)="recordScore($event)"></app-snake-game>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="restart()">RESTART</button>
+        <button mat-button color="accent" routerLink="/">HOME</button>
+      </mat-card-actions>
+    </mat-card>
+  `,
+  styles: [`
+    .snek-card {
+      width: min(100%, 1080px);
+      margin: min(10%, 1em) auto;
+      white-space: pre-wrap;
+
+      .canvas-container {
+        text-align: center;
+      }
+    }
+  `]
 })
 export class SnekComponent implements OnInit {
   @ViewChild('game', { static: true }) game!: SnakeGameComponent;

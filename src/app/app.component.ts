@@ -12,8 +12,11 @@ import { ThemeService } from '@services/theme.service';
     HeaderComponent
   ],
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+    <app-header></app-header>
+    <router-outlet></router-outlet>
+  `,
+  styles: ['']
 })
 export class AppComponent {
   constructor(private theme: ThemeService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {

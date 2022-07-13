@@ -31,8 +31,55 @@ import { ConfirmationDialogData, ConfirmationDialogComponent } from '@components
     SkeletonLoaderComponent
   ],
   selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+  template: `
+    <!-- Fetch user profile from Auth0 -->
+    <ng-container *ngIf="auth.userProfile$ | async as profile; else loading">
+      <mat-card class="settings-card">
+        <mat-card-header>
+          <img mat-card-image mat-card-avatar [src]="profile.picture">
+          <mat-card-title>
+            {{ profile.name }}
+          </mat-card-title>
+          <mat-card-subtitle>
+            User Settings
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field>
+            <mat-label>Theme</mat-label>
+            <mat-select [(ngModel)]="themeSelection" (selectionChange)="theme.setTheme(themeSelection)">
+              <mat-option *ngFor="let theme of themeList$ | async" [value]="theme">
+                {{ theme.displayName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="accent" routerLink="/">HOME</button>
+          <button mat-button color="warn" (click)="logout()">LOG OUT</button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-container>
+
+    <!-- Placeholder loading bars -->
+    <ng-template #loading>
+      <mat-card class="settings-card">
+        <mat-card-title>
+          <app-skeleton-loader></app-skeleton-loader>
+        </mat-card-title>
+        <mat-card-content>
+          <app-skeleton-loader [count]="5"></app-skeleton-loader>
+        </mat-card-content>
+      </mat-card>
+    </ng-template>
+  `,
+  styles: [`
+    .settings-card {
+      width: min(70%, 40em);
+      margin: min(10%, 5em) auto;
+      white-space: pre-wrap;
+    }
+  `]
 })
 export class SettingsComponent implements OnInit {
   public themeList$!: Observable<BaseTheme[]>;
