@@ -15,7 +15,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BostonParameters, BostonPrediction } from '../../models/colab-hosting.model';
 import { ColabHostingService } from '../../services/colab-hosting.service';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
-import { NotificationDialogComponent, NotificationDialogData } from '../../components/notification-dialog/notification-dialog.component';
+import { NotificationDialogComponent, NotificationDialogData } from '../../components/notification-dialog.component';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';

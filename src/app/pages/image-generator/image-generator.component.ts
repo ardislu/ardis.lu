@@ -8,7 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { RandomImageComponent } from '../../components/random-image/random-image.component';
+import { RandomImageComponent } from '../../components/random-image.component';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
