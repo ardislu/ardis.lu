@@ -53,9 +53,7 @@
               }
             ],
             "styles": [
-              {
-                "input": "src/ardis-theme.scss"
-              },
+              "src/ardis-theme.scss",
               "src/styles.scss"
             ],
             "scripts": []
