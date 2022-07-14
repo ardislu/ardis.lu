@@ -1,15 +1,21 @@
 {
   "name": "ardis.lu",
-  "short_name": "a.lu",
-  "theme_color": "#558dd1",
-  "background_color": "#e7d26a",
+  "description": "Personal website to experiment with web technology and host interesting content.",
   "display": "standalone",
-  "scope": "./",
-  "start_url": "./",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "theme_color": "#212121",
+  "background_color": "#212121",
   "icons": [
     {
-      "src": "/favicon.svg",
-      "sizes": "144x144"
+      "src": "/logo.svg",
+      "sizes": "150x150"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "purpose": "maskable"
     }
   ]
 }
