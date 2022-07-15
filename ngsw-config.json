@@ -9,6 +9,7 @@
         "files": [
           "/logo.svg",
           "/logo.png",
+          "/logo_maskable.png",
           "/index.html",
           "/manifest.webmanifest",
           "/*.css",
