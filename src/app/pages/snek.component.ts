@@ -16,7 +16,7 @@ import { SnakeGameComponent } from '@components/snake-game.component';
   ],
   selector: 'app-snek',
   template: `
-    <mat-card class="snek-card">
+    <mat-card>
       <mat-card-title>
         snek
       </mat-card-title>
@@ -24,7 +24,7 @@ import { SnakeGameComponent } from '@components/snake-game.component';
         this is snek // high: {{ highScore }} // last: {{ lastScore }}
       </mat-card-subtitle>
 
-      <mat-card-content class="canvas-container">
+      <mat-card-content>
         <app-snake-game #game [gridSize]="gameGrid" [width]="gameWidth" [height]="gameHeight"
           (gameEnded)="recordScore($event)"></app-snake-game>
       </mat-card-content>
@@ -36,14 +36,15 @@ import { SnakeGameComponent } from '@components/snake-game.component';
     </mat-card>
   `,
   styles: [`
-    .snek-card {
-      width: min(100%, 1080px);
-      margin: min(10%, 1em) auto;
-      white-space: pre-wrap;
+    mat-card {
+      box-sizing: border-box;
+      inline-size: min(100% - 2rem, 480px);
+      margin-inline: auto;
+      margin-block-start: 1rem;
+    }
 
-      .canvas-container {
-        text-align: center;
-      }
+    mat-card-content {
+      text-align: center;
     }
   `]
 })
@@ -51,8 +52,8 @@ export class SnekComponent implements OnInit {
   @ViewChild('game', { static: true }) game!: SnakeGameComponent;
 
   private minGrids = 10; // At least this many squares in any direction
-  private actualWidth = 500;
-  private actualHeight = 500;
+  private actualWidth = 448;
+  private actualHeight = 448;
 
   /* eslint-disable @typescript-eslint/member-ordering -- these variables depend on the private variables */
   public gameGrid = this.actualWidth / this.minGrids;
@@ -63,8 +64,8 @@ export class SnekComponent implements OnInit {
   /* eslint-enable @typescript-eslint/member-ordering */
 
   ngOnInit(): void {
-    this.actualWidth = Math.min(window.innerWidth * 0.7, 1080);
-    this.actualHeight = Math.min(window.innerHeight * 0.35, 1080);
+    this.actualWidth = Math.min(window.innerWidth * 0.7, 448);
+    this.actualHeight = Math.min(window.innerHeight * 0.35, 448);
 
     this.gameGrid = Math.floor(Math.min(this.actualWidth, this.actualHeight) / this.minGrids);
 
