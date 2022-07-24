@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  strapiHost: 'https://cms.ardis.lu'
+  directusHost: 'https://cms.ardis.lu'
 };

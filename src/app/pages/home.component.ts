@@ -5,9 +5,10 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
-import { StrapiService } from '@services/strapi.service';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+
+import { DirectusService } from '@services/directus.service';
+import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
 import { NotificationDialogComponent, NotificationDialogData } from '@components/notification-dialog.component';
 
 @Component({
@@ -26,7 +27,7 @@ import { NotificationDialogComponent, NotificationDialogData } from '@components
   template: `
     <main>
       <!-- Project cards fetched from API  -->
-      <ng-container *ngIf="strapi.cards$ | async as projectCards; else loading">
+      <ng-container *ngIf="directus.cards$ | async as projectCards; else loading">
         <mat-card *ngFor="let project of projectCards">
           <mat-card-title>
             <div>{{ project.title }}</div>
@@ -72,7 +73,7 @@ import { NotificationDialogComponent, NotificationDialogData } from '@components
 export class HomeComponent {
   public placeholderCards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-  constructor(public strapi: StrapiService, private router: Router, private dialog: MatDialog) { }
+  constructor(public directus: DirectusService, private router: Router, private dialog: MatDialog) { }
 
   openProject(project: string): void {
     if (project === 'placeholder') {

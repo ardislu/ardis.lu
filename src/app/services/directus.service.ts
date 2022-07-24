@@ -9,18 +9,18 @@ import { AboutCard } from '@models/about.model';
 @Injectable({
   providedIn: 'root'
 })
-export class StrapiService {
+export class DirectusService {
   private _cards$: Observable<ProjectCard[]>;
   private _about$: Observable<AboutCard>;
 
   constructor(private http: HttpClient) {
-    this._cards$ = this.http.get(`${environment.strapiHost}/project-cards`).pipe(
+    this._cards$ = this.http.get(`${environment.directusHost}/items/cards`).pipe(
       shareReplay(1),
-      map(StrapiService.toProjectCards)
+      map(DirectusService.toProjectCards)
     );
-    this._about$ = this.http.get(`${environment.strapiHost}/about`).pipe(
+    this._about$ = this.http.get(`${environment.directusHost}/items/about`).pipe(
       shareReplay(1),
-      map(StrapiService.toAboutCard)
+      map(DirectusService.toAboutCard)
     );
   }
 
@@ -33,8 +33,8 @@ export class StrapiService {
   }
 
   public static toProjectCards(obj: Record<string, any>): ProjectCard[] {
-    // CMS returns [{item}]
-    return obj.map((card: Record<string, any>) => ({
+    // CMS returns { 'data': [{item}] }
+    return obj.data.map((card: Record<string, any>) => ({
       title: card.title,
       description: card.description,
       route: card.route
@@ -42,11 +42,11 @@ export class StrapiService {
   }
 
   public static toAboutCard(obj: Record<string, any>): AboutCard {
-    // CMS returns {item}
+    // CMS returns { 'data': {item} }
     return {
-      title: obj.title,
-      subtitle: obj.subtitle,
-      description: obj.description
+      title: obj.data.title,
+      subtitle: obj.data.subtitle,
+      description: obj.data.description
     };
   }
 }

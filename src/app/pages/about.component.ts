@@ -4,8 +4,9 @@ import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+
+import { DirectusService } from '@services/directus.service';
 import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
-import { StrapiService } from '@services/strapi.service';
 
 @Component({
   standalone: true,
@@ -20,7 +21,7 @@ import { StrapiService } from '@services/strapi.service';
   selector: 'app-about',
   template: `
     <!-- Fetch About info from CMS -->
-    <ng-container *ngIf="strapi.about$ | async as aboutCard; else loading">
+    <ng-container *ngIf="directus.about$ | async as aboutCard; else loading">
       <mat-card class="about-card">
         <mat-card-header>
           <mat-icon mat-card-avatar svgIcon="logo"></mat-icon>
@@ -67,5 +68,5 @@ import { StrapiService } from '@services/strapi.service';
   `]
 })
 export class AboutComponent {
-  constructor(public location: Location, public strapi: StrapiService) { }
+  constructor(public location: Location, public directus: DirectusService) { }
 }
