@@ -30,7 +30,7 @@
   ],
   "dataGroups": [
     {
-      "name": "strapi-api",
+      "name": "directus-api",
       "urls": [
         "https://cms.ardis.lu/**"
       ],
