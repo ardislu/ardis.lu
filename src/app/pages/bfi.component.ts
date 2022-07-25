@@ -23,35 +23,29 @@ import { BfService } from '@services/bf.service';
   ],
   selector: 'app-bfi',
   template: `
-    <mat-card class="bfi-card">
-      <mat-card-header>
-        <mat-card-title>
-          bf-interpreter
-        </mat-card-title>
-        <mat-card-subtitle>
-          Turing-complete!
-          <a target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Brainfuck">
-            <mat-icon svgIcon="launch" class="subtitle-link"></mat-icon>
-          </a>
-        </mat-card-subtitle>
-      </mat-card-header>
+    <mat-card>
+      <mat-card-title>
+        bf-interpreter
+      </mat-card-title>
+      <mat-card-subtitle>
+        Turing-complete!
+        <a target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Brainfuck">
+          <mat-icon svgIcon="launch"></mat-icon>
+        </a>
+      </mat-card-subtitle>
 
       <mat-card-content>
-        <mat-form-field class="text-block">
+        <mat-form-field>
           <mat-label>Input</mat-label>
           <textarea matInput cdkTextareaAutosize [(ngModel)]="bf.input"></textarea>
         </mat-form-field>
-      </mat-card-content>
 
-      <mat-card-content>
-        <mat-form-field class="text-block">
+        <mat-form-field>
           <mat-label>Script</mat-label>
           <textarea matInput cdkTextareaAutosize [(ngModel)]="bf.script"></textarea>
         </mat-form-field>
-      </mat-card-content>
 
-      <mat-card-content>
-        <mat-form-field class="text-block">
+        <mat-form-field>
           <mat-label>Output</mat-label>
           <textarea matInput cdkTextareaAutosize disabled [value]="output"></textarea>
         </mat-form-field>
@@ -66,18 +60,19 @@ import { BfService } from '@services/bf.service';
     </mat-card>
   `,
   styles: [`
-    .bfi-card {
-      width: 85%;
-      margin: min(5%, 5em) auto;
-      white-space: pre-wrap;
+    mat-card {
+      box-sizing: border-box;
+      inline-size: min(100% - 2rem, 720px);
+      margin-inline: auto;
+      margin-block: 1rem;
     }
 
-    .subtitle-link {
-      height: 14px;
+    mat-icon {
+      block-size: 14px;
     }
 
-    .text-block {
-      width: 100%;
+    mat-form-field {
+      inline-size: 100%;
     }
   `]
 })
