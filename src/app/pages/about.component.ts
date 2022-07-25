@@ -22,7 +22,7 @@ import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
   template: `
     <!-- Fetch About info from CMS -->
     <ng-container *ngIf="directus.about$ | async as aboutCard; else loading">
-      <mat-card class="about-card">
+      <mat-card>
         <mat-card-header>
           <mat-icon mat-card-avatar svgIcon="logo"></mat-icon>
           <mat-card-title>
@@ -49,7 +49,7 @@ import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
 
     <!-- Placeholder loading bars -->
     <ng-template #loading>
-      <mat-card class="about-card">
+      <mat-card>
         <mat-card-title>
           <app-skeleton-loader></app-skeleton-loader>
         </mat-card-title>
@@ -60,10 +60,11 @@ import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
     </ng-template>
   `,
   styles: [`
-    .about-card {
-      width: min(70%, 40em);
-      margin: min(10%, 5em) auto;
-      white-space: pre-wrap;
+    mat-card {
+      box-sizing: border-box;
+      inline-size: min(100% - 2rem, 720px);
+      margin-inline: auto;
+      margin-block: 1rem;
     }
   `]
 })
