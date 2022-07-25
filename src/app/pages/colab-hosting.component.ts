@@ -40,19 +40,17 @@ import { HttpErrorResponse } from '@angular/common/http';
   ],
   selector: 'app-colab-hosting',
   template: `
-    <mat-card class="colab-card">
-      <mat-card-header>
-        <mat-card-title class="mat-card-header-text-margin">colab hosting</mat-card-title>
-        <mat-card-subtitle class="mat-card-header-text-margin">Complementary front-end that queries my
-          <a target="_blank" rel="noopener noreferrer"
-            href="https://colab.research.google.com/github/ardislu/colab-hosting-example/blob/main/colab-hosting-example.ipynb">Colab-based
-            machine learning backend<mat-icon svgIcon="launch" class="subtitle-link"></mat-icon>
-          </a>.
-        </mat-card-subtitle>
-      </mat-card-header>
+    <mat-card>
+      <mat-card-title class="mat-card-header-text-margin">colab hosting</mat-card-title>
+      <mat-card-subtitle class="mat-card-header-text-margin">Complementary front-end that queries my
+        <a target="_blank" rel="noopener noreferrer"
+          href="https://colab.research.google.com/github/ardislu/colab-hosting-example/blob/main/colab-hosting-example.ipynb">Colab-based
+          machine learning backend<mat-icon svgIcon="launch"></mat-icon>
+        </a>.
+      </mat-card-subtitle>
 
       <mat-card-content>
-        <mat-form-field class="text-block">
+        <mat-form-field>
           <mat-label>ngrok URL</mat-label>
           <input matInput [(ngModel)]="colabHost" (change)="setColabHost($event)" type="url" pattern="(https?:\/\/)?(\w|-)+\.ngrok\.io\/?"
             placeholder="https://xxxxxxxxxxxx.ngrok.io/" required>
@@ -75,6 +73,7 @@ import { HttpErrorResponse } from '@angular/common/http';
           <mat-expansion-panel-header>
             <mat-panel-title>Advanced options</mat-panel-title>
           </mat-expansion-panel-header>
+
           <mat-form-field class="text-block" appearance="fill">
             <mat-label>Machine learning model</mat-label>
             <mat-select [(ngModel)]="selectedModel" name="model">
@@ -84,12 +83,10 @@ import { HttpErrorResponse } from '@angular/common/http';
             </mat-select>
           </mat-form-field>
 
-          <div class="parameter-settings-group">
-            <mat-form-field class="parameter-setting" *ngFor="let item of customParams | keyvalue; trackBy: trackByNull">
-              <mat-label>{{ item.key }}</mat-label>
-              <input matInput [value]="item.value" (change)="setParam(item.key, $event)" type="number" step="0.00001">
-            </mat-form-field>
-          </div>
+          <mat-form-field class="parameter-setting" *ngFor="let item of customParams | keyvalue; trackBy: trackByNull">
+            <mat-label>{{ item.key }}</mat-label>
+            <input matInput [value]="item.value" (change)="setParam(item.key, $event)" type="number" step="0.00001">
+          </mat-form-field>
 
         </mat-expansion-panel>
       </mat-card-content>
@@ -113,52 +110,48 @@ import { HttpErrorResponse } from '@angular/common/http';
     </ng-template>
   `,
   styles: [`
-    .colab-card {
-      width: min(70%, 50em);
-      margin: min(10%, 5em) auto;
-      white-space: pre-wrap;
+    mat-card {
+      box-sizing: border-box;
+      inline-size: min(100% - 2rem, 720px);
+      margin-inline: auto;
+      margin-block: 1rem;
     }
 
-    .subtitle-link {
-      height: 14px;
+    mat-icon {
+      block-size: 14px;
     }
 
-    .text-block {
-      width: 100%;
+    mat-form-field {
+      inline-size: 100%;
     }
 
-    // Offset the margin-left on .mat-card-header-text, which can't be overridden
-    // without a global !important, or a deprecated ::ng-deep
-    .mat-card-header-text-margin {
-      margin-left: -16px;
-    }
-
-    .mat-radio-group {
+    mat-radio-group {
       display: flex;
       flex-direction: column;
     }
 
-    .mat-radio-button {
-      margin: 5px 0;
+    mat-radio-button {
+      margin-block: 0.3rem;
     }
 
-    .mat-divider {
-      z-index: 1;
+    mat-divider {
+      margin-block: 1rem;
     }
 
-    .mat-expansion-panel-header {
-      margin-top: 16px;
-      padding: 16px;
-    }
-
-    .parameter-settings-group {
+    mat-expansion-panel {
       display: flex;
       flex-flow: row wrap;
     }
 
+    mat-expansion-panel-header {
+      inline-size: 100%;
+      padding-inline: 0.5rem;
+      padding-block: 1rem;
+    }
+
     .parameter-setting {
-      width: 8em;
-      padding-right: 2%;
+      inline-size: 7rem;
+      margin-inline-end: 1rem;
     }
   `]
 })
