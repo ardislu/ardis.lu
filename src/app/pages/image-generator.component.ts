@@ -28,29 +28,26 @@ import { debounceTime } from 'rxjs/operators';
   ],
   selector: 'app-image-generator',
   template: `
-    <mat-card class="image-card">
-      <mat-card-title>
-        <div>Image Generator</div>
-      </mat-card-title>
+    <mat-card>
+      <mat-card-title>Image Generator</mat-card-title>
 
       <mat-card-content>
-        The image below is procedurally generated and rendered using the HTML5 Canvas element. Enter a new seed below to
-        generate a new image, or click the dice icon to generate a new random seed.
-      </mat-card-content>
+        <p>
+          The image below is procedurally generated and rendered using the HTML5 Canvas element. Enter a new seed below to
+          generate a new image, or click the dice icon to generate a new random seed.
+        </p>
 
-      <mat-card-content>
-        <mat-form-field>
-          <mat-label>Seed</mat-label>
-          <input matInput [(ngModel)]="inputValue" (ngModelChange)="inputChanged.next()">
-        </mat-form-field>
-        <button mat-icon-button (click)="randSeed()">
-          <mat-icon svgIcon="dice"></mat-icon>
-        </button>
-        <mat-divider></mat-divider>
-      </mat-card-content>
+        <div class="seed-container">
+          <mat-form-field>
+            <mat-label>Seed</mat-label>
+            <input matInput [(ngModel)]="inputValue" (ngModelChange)="inputChanged.next()">
+          </mat-form-field>
+          <button mat-icon-button (click)="randSeed()">
+            <mat-icon svgIcon="dice"></mat-icon>
+          </button>
+        </div>
 
-      <mat-card-content class="canvas-container">
-        <app-random-image [seed]="seed" [circleCount]="length/2" [width]="length" [height]="length"></app-random-image>
+        <app-random-image [seed]="seed" [circleCount]="150"></app-random-image>
       </mat-card-content>
 
       <mat-card-actions>
@@ -61,35 +58,49 @@ import { debounceTime } from 'rxjs/operators';
     </mat-card>
   `,
   styles: [`
-    .image-card {
-      width: 85%;
-      margin: min(5%, 5em) auto;
-      white-space: pre-wrap;
+    mat-card {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      inline-size: min(100% - 2rem, 720px);
+      block-size: min(100vh - 2rem - 40px, 720px);
+      margin-inline: auto;
+      margin-block: 1rem;
     }
 
-    .canvas-container {
-      text-align: center;
+    mat-card-content {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      margin: 0;
+    }
+
+    .seed-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .seed-container > mat-form-field {
+      flex-grow: 1;
+    }
+
+    app-random-image {
+      /* MUST set height to less than actual space available, otherwise flex-grow: 1
+      will add 5px every time this element is refreshed. */
+      height: 1px;
+      flex-grow: 1;
     }
   `]
 })
 export class ImageGeneratorComponent implements OnInit {
   public inputValue!: string;
   public seed!: string;
-  public length = 800;
   public inputChanged: Subject<void | string> = new Subject<void | string>();
 
   ngOnInit(): void {
     // Set a 300 ms wait time between input events before proceeding
     this.inputChanged.pipe(debounceTime(300)).subscribe(() => this.seed = this.inputValue);
-
-    this.resizeCanvas();
     this.randSeed();
-  }
-
-  resizeCanvas(): void {
-    const maxCanvasHeight = Math.floor(window.innerHeight * 0.85);
-    const maxCanvasWidth = Math.floor(window.innerWidth * 0.85);
-    this.length = Math.min(maxCanvasHeight, maxCanvasWidth);
   }
 
   randSeed(): void {
