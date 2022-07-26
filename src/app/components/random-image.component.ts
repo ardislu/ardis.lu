@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, ViewChild, ElementRef, Self } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,9 +11,9 @@ import { CommonModule } from '@angular/common';
 export class RandomImageComponent implements OnInit, OnChanges {
   @Input() seed: string = Math.random().toString();
   @Input() circleCount = 600;
-  @Input() width = 300;
-  @Input() height = 300;
-  @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('canvas', { static: true }) private canvas!: ElementRef<HTMLCanvasElement>;
+
+  constructor(@Self() private element: ElementRef) { }
 
   ngOnInit(): void {
     this.generateImage();
@@ -27,15 +27,16 @@ export class RandomImageComponent implements OnInit, OnChanges {
     const seed = this.cyrb128(this.seed);
     const pRand = this.sfc32(seed[0], seed[1], seed[2], seed[3]);
 
-    this.canvas.nativeElement.width = this.width;
-    this.canvas.nativeElement.height = this.height;
+    const { width, height } = this.element.nativeElement.getBoundingClientRect();
+    this.canvas.nativeElement.width = width;
+    this.canvas.nativeElement.height = height;
 
     const ctx = this.canvas.nativeElement.getContext('2d') as CanvasRenderingContext2D;
 
     for (let i = 0; i < this.circleCount; i++) {
-      const x = Math.floor(pRand() * this.width);
-      const y = Math.floor(pRand() * this.height);
-      const radius = Math.floor(pRand() * Math.floor(this.width * 0.08));
+      const x = Math.floor(pRand() * width);
+      const y = Math.floor(pRand() * height);
+      const radius = Math.floor(pRand() * Math.floor(width * 0.08));
       const r = Math.floor(pRand() * 255);
       const g = Math.floor(pRand() * 255);
       const b = Math.floor(pRand() * 255);
