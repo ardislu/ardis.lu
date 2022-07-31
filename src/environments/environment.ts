@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  directusHost: 'http://100.84.210.59:8055'
+  directusOrigin: 'http://100.84.210.59:8055'
 };
 
 /*

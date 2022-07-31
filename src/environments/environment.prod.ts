@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  directusHost: 'https://cms.ardis.lu'
+  directusOrigin: 'https://cms.ardis.lu'
 };

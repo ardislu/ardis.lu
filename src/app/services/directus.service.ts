@@ -14,11 +14,11 @@ export class DirectusService {
   private _about$: Observable<AboutCard>;
 
   constructor(private http: HttpClient) {
-    this._cards$ = this.http.get(`${environment.directusHost}/items/cards`).pipe(
+    this._cards$ = this.http.get(`${environment.directusOrigin}/items/cards`).pipe(
       shareReplay(1),
       map(DirectusService.toProjectCards)
     );
-    this._about$ = this.http.get(`${environment.directusHost}/items/about`).pipe(
+    this._about$ = this.http.get(`${environment.directusOrigin}/items/about`).pipe(
       shareReplay(1),
       map(DirectusService.toAboutCard)
     );
