@@ -1,128 +1,127 @@
 import { Injectable } from '@angular/core';
-import createAuth0Client from '@auth0/auth0-spa-js';
-import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
-import { from, of, Observable, BehaviorSubject, combineLatest, throwError } from 'rxjs';
-import { tap, catchError, concatMap, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
-/* eslint-disable @typescript-eslint/member-ordering */
-/* eslint-disable @typescript-eslint/naming-convention */
+import { environment } from '@environment';
+import { UserProfile } from '@models/user-profile.model';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // Create an observable of Auth0 instance of client
-  auth0Client$ = (from(
-    createAuth0Client({
-      domain: 'ardislu.us.auth0.com',
-      client_id: '1YTZAthJfm5z7n9U23CzMDO00ukqm467',
-      redirect_uri: `${window.location.origin}`
-    })
-  ) as Observable<Auth0Client>).pipe(
-    shareReplay(1), // Every subscription receives the same shared value
-    catchError(err => throwError(err))
-  );
-  // Define observables for SDK methods that return promises by default
-  // For each Auth0 SDK method, first ensure the client instance is ready
-  // concatMap: Using the client instance, call SDK method; SDK returns a promise
-  // from: Convert that resulting promise into an observable
-  isAuthenticated$ = this.auth0Client$.pipe(
-    concatMap((client: Auth0Client) => from(client.isAuthenticated())),
-    tap(res => this.loggedIn = res)
-  );
-  handleRedirectCallback$ = this.auth0Client$.pipe(
-    concatMap((client: Auth0Client) => from(client.handleRedirectCallback()))
-  );
-  // Create subject and public observable of user profile data
-  private userProfileSubject$ = new BehaviorSubject<any>(null);
-  userProfile$ = this.userProfileSubject$.asObservable();
-  // Create a local property for login status
-  loggedIn: boolean | null = null;
+  userProfile$: BehaviorSubject<UserProfile | null>;
+  loggedIn: boolean;
 
   constructor(private router: Router) {
-    // On initial load, check authentication state with authorization server
-    // Set up local auth streams if user is already authenticated
-    this.localAuthSetup();
-    // Handle redirect from Auth0 login
-    this.handleAuthCallback();
+    this.userProfile$ = new BehaviorSubject<UserProfile | null>(null);
+    this.loggedIn = false;
+
+    this.handleRedirectCallback();
   }
 
-  // When calling, options can be passed if desired
-  // https://auth0.github.io/auth0-spa-js/classes/auth0client.html#getuser
-  getUser$(options?: any): Observable<any> {
-    return this.auth0Client$.pipe(
-      concatMap((client: Auth0Client) => from(client.getUser(options))),
-      tap(user => this.userProfileSubject$.next(user))
-    );
+  /* Adapter to convert the the id_token from /oauth/token into UserProfile */
+  public static toUserProfile(payload: Record<string, any>): UserProfile {
+    return {
+      email: payload.email,
+      email_verified: payload.email_verified,
+      name: payload.name,
+      nickname: payload.nickname,
+      picture: payload.picture,
+      updated_at: payload.updated_at
+    };
   }
 
-  private localAuthSetup() {
-    // This should only be called on app initialization
-    // Set up local authentication streams
-    const checkAuth$ = this.isAuthenticated$.pipe(
-      concatMap((loggedIn: boolean) => {
-        if (loggedIn) {
-          // If authenticated, get user and set in app
-          // NOTE: you could pass options here if needed
-          return this.getUser$();
-        }
-        // If not authenticated, return stream that emits 'false'
-        return of(loggedIn);
-      })
-    );
-    checkAuth$.subscribe();
-  }
+  public async login(redirectPath = location.pathname) {
+    sessionStorage.setItem('auth_redirect_path', redirectPath);
 
-  login(redirectPath: string = '/') {
-    // A desired redirect path can be passed to login method
-    // (e.g., from a route guard)
-    // Ensure Auth0 client instance exists
-    this.auth0Client$.subscribe((client: Auth0Client) => {
-      // Call method to log in
-      client.loginWithRedirect({
-        redirect_uri: `${window.location.origin}`,
-        appState: { target: redirectPath }
-      });
+    const state = crypto.randomUUID();
+    const codeVerifier = this.generateCodeVerifier();
+    const codeChallenge = await this.generateCodeChallenge(codeVerifier);
+    sessionStorage.setItem('state', state);
+    sessionStorage.setItem('code_verifier', codeVerifier);
+
+    const params = new URLSearchParams({
+      response_type: 'code',
+      code_challenge: codeChallenge,
+      code_challenge_method: 'S256',
+      client_id: environment.authClientId,
+      redirect_uri: location.origin,
+      scope: 'openid profile email',
+      state
     });
+    location.href = `${environment.authOrigin}/authorize?${params}`;
   }
 
-  private handleAuthCallback() {
-    // Call when app reloads after user logs in with Auth0
-    const params = window.location.search;
-    if (params.includes('code=') && params.includes('state=')) {
-      let targetRoute: string; // Path to redirect to after login processed
-      const authComplete$ = this.handleRedirectCallback$.pipe(
-        // Have client, now call method to handle auth callback redirect
-        tap(cbRes => {
-          // Get and set target redirect route from callback results
-          targetRoute = cbRes.appState && cbRes.appState.target ? cbRes.appState.target : '/';
-        }),
-        concatMap(() =>
-          // Redirect callback complete; get user and login status
-          combineLatest([
-            this.getUser$(),
-            this.isAuthenticated$
-          ])
-        )
-      );
-      // Subscribe to authentication completion observable
-      // Response will be an array of user and login status
-      authComplete$.subscribe(([user, loggedIn]) => {
-        // Redirect to target route after callback processing
-        this.router.navigate([targetRoute]);
-      });
+  public logout() {
+    this.userProfile$.next(null);
+    this.loggedIn = false;
+
+    const params = new URLSearchParams({
+      returnTo: location.origin,
+      client_id: environment.authClientId
+    });
+    location.href = `${environment.authOrigin}/v2/logout?${params}`;
+  }
+
+  private async handleRedirectCallback() {
+    const { code, state } = Object.fromEntries(new URLSearchParams(location.search));
+
+    if (code === undefined || state === undefined || sessionStorage.getItem('state') !== state) {
+      return;
     }
-  }
 
-  logout() {
-    // Ensure Auth0 client instance exists
-    this.auth0Client$.subscribe((client: Auth0Client) => {
-      // Call method to log out
-      client.logout({
-        client_id: '1YTZAthJfm5z7n9U23CzMDO00ukqm467',
-        returnTo: `${window.location.origin}`
-      });
+    const body = new URLSearchParams({
+      grant_type: 'authorization_code',
+      client_id: environment.authClientId,
+      code_verifier: sessionStorage.getItem('code_verifier') as string,
+      code,
+      redirect_uri: location.origin,
+      scope: 'openid profile email'
     });
+    const idPayload = await fetch('https://ardislu.us.auth0.com/oauth/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body
+    })
+      .then(r => r.json())
+      .then(this.getIdTokenPayload.bind(this));
+
+    this.userProfile$.next(AuthService.toUserProfile(idPayload));
+    this.loggedIn = true;
+
+    this.router.navigateByUrl(sessionStorage.getItem('auth_redirect_path') as string);
   }
 
+  /* Helper functions */
+  private base64UrlEncode(s: string) {
+    return btoa(s)
+      .replaceAll('=', '')
+      .replaceAll('+', '-')
+      .replaceAll('/', '_');
+  }
+
+  private base64UrlDecode(s: string) {
+    return atob(s
+      .replaceAll('+', '-')
+      .replaceAll('/', '_'));
+  }
+
+  private getIdTokenPayload(response: Record<string, any>) {
+    const payload = response.id_token.split('.')[1];
+    const buffer = Uint8Array.from(this.base64UrlDecode(payload), c => c.charCodeAt(0));
+    const decoded = new TextDecoder().decode(buffer);
+    return JSON.parse(decoded);
+  }
+
+  private generateCodeVerifier() {
+    const a = new Uint8Array(64);
+    crypto.getRandomValues(a);
+    return [...a].map(c => c.toString(16).padStart(2, '0')).join('');
+  }
+
+  private async generateCodeChallenge(codeVerifier: string) {
+    const buffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(codeVerifier));
+    const str = String.fromCharCode(...new Uint8Array(buffer));
+    return this.base64UrlEncode(str);
+  }
 }
