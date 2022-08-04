@@ -45,9 +45,11 @@ The Angular architects have been adapted for these frameworks so tests are still
 
 # Cloudflare Tunnel
 
-I use `cloudflared` in the `start:tunnel` and `stage:tunnel` npm scripts. This command exposes `localhost` to the internet for rapid prototyping with external parties.
+This project uses `cloudflared` in the `tunnel` npm script. This command exposes `localhost` over a publicly-accessible HTTPS URL.
 
-To use these scripts, you must [download the `cloudflared` executable](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/installation/) and make it available on your `PATH`.
+A tunnel is required to test this website on other devices because some web APIs used in this site are [restricted to secure contexts](https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts/features_restricted_to_secure_contexts).
+
+To use `tunnel`, you must [set up cloudflared](https://ardislu.dev/minimum-cloudflare-tunnel).
 
 # npm scripts
 
@@ -57,22 +59,10 @@ Modified `npm start` runs `ng serve --hmr --host 0.0.0.0` instead of the default
 npm start
 ```
 
-Run `npm start` and also `cloudflared tunnel` to expose `localhost:4200` to a public URL.
-
-```
-npm run start:tunnel
-```
-
 Build the web app then host it locally using local-web-server. Use to simulate production for e2e testing.
 
 ```
 npm run stage
-```
-
-Run `npm run stage` and also `cloudflared tunnel` to expose `localhost:8000` to a public URL.
-
-```
-npm run stage:tunnel
 ```
 
 Build the web app then use source-map-explorer to analyze main.js. Use to identify and reduce bloat.

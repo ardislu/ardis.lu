@@ -19,11 +19,9 @@
     "e2e": "ng e2e",
     "build": "ng build",
     "postbuild": "purgecss --css dist/ardis-lu-frontend/*.css --content dist/ardis-lu-frontend/index.html dist/ardis-lu-frontend/*.js --output dist/ardis-lu-frontend/",
-    "cloudflared": "cloudflared tunnel",
+    "tunnel": "cloudflared tunnel run",
     "start": "ng serve --hmr --host 0.0.0.0",
-    "start:tunnel": "run-p \"start -- --disable-host-check\" \"cloudflared -- --url localhost:4200\"",
     "stage": "npm run build -- --configuration production && cd dist/ardis-lu-frontend && ws --spa index.html --log.format stats --compress",
-    "stage:tunnel": "run-p stage \"cloudflared -- --url localhost:8000\"",
     "analyze": "npm run build -- --configuration production --source-map --vendor-chunk=false && source-map-explorer dist/ardis-lu-frontend/main.*.js"
   },
   "private": true,
