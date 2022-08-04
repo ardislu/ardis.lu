@@ -7,13 +7,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+
+import { BaseTheme } from '@models/theme.model';
 import { AuthService } from '@services/auth.service';
 import { ThemeService } from '@services/theme.service';
-import { BaseTheme } from '@models/theme.model';
-
-import { Observable } from 'rxjs';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
 import { ConfirmationDialogData, ConfirmationDialogComponent } from '@components/confirmation-dialog.component';
 
 @Component({
