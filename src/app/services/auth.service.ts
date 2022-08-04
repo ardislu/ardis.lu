@@ -78,15 +78,16 @@ export class AuthService {
       redirect_uri: location.origin,
       scope: 'openid profile email'
     });
-    const idPayload = await fetch('https://ardislu.us.auth0.com/oauth/token', {
+    const userProfile = await fetch('https://ardislu.us.auth0.com/oauth/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body
     })
       .then(r => r.json())
-      .then(this.getIdTokenPayload.bind(this));
+      .then(this.getIdTokenPayload.bind(this))
+      .then(AuthService.toUserProfile);
 
-    this.userProfile$.next(AuthService.toUserProfile(idPayload));
+    this.userProfile$.next(userProfile);
     this.loggedIn = true;
 
     this.router.navigateByUrl(sessionStorage.getItem('auth_redirect_path') as string);
