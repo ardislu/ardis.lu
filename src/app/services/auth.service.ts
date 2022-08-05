@@ -78,7 +78,8 @@ export class AuthService {
       redirect_uri: location.origin,
       scope: 'openid profile email'
     });
-    const userProfile = await fetch('https://ardislu.us.auth0.com/oauth/token', {
+    // ngsw-bypass tells service worker to not cache this request
+    const userProfile = await fetch('https://ardislu.us.auth0.com/oauth/token?ngsw-bypass', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body
