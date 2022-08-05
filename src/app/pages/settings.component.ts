@@ -34,7 +34,7 @@ import { ConfirmationDialogData, ConfirmationDialogComponent } from '@components
   template: `
     <!-- Fetch user profile from Auth0 -->
     <ng-container *ngIf="auth.userProfile$ | async as profile; else loading">
-      <mat-card class="settings-card">
+      <mat-card>
         <mat-card-header>
           <img mat-card-image mat-card-avatar [src]="profile.picture">
           <mat-card-title>
@@ -63,7 +63,7 @@ import { ConfirmationDialogData, ConfirmationDialogComponent } from '@components
 
     <!-- Placeholder loading bars -->
     <ng-template #loading>
-      <mat-card class="settings-card">
+      <mat-card>
         <mat-card-title>
           <app-skeleton-loader></app-skeleton-loader>
         </mat-card-title>
@@ -74,10 +74,11 @@ import { ConfirmationDialogData, ConfirmationDialogComponent } from '@components
     </ng-template>
   `,
   styles: [`
-    .settings-card {
-      width: min(70%, 40em);
-      margin: min(10%, 5em) auto;
-      white-space: pre-wrap;
+    mat-card {
+      box-sizing: border-box;
+      inline-size: min(100% - 2rem, 720px);
+      margin-inline: auto;
+      margin-block: 1rem;
     }
   `]
 })
