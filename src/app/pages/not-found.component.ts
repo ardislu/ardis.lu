@@ -17,7 +17,7 @@ import Fuse from 'fuse.js';
   ],
   selector: 'app-not-found',
   template: `
-    <mat-card class="not-found-card">
+    <mat-card>
       <mat-card-header>
         <mat-icon mat-card-avatar svgIcon="logo"></mat-icon>
         <mat-card-title>
@@ -44,9 +44,11 @@ import Fuse from 'fuse.js';
     </mat-card>
   `,
   styles: [`
-    .not-found-card {
-      width: min(70%, 40em);
-      margin: min(10%, 5em) auto;
+    mat-card {
+      box-sizing: border-box;
+      inline-size: min(100% - 2rem, 720px);
+      margin-inline: auto;
+      margin-block: 1rem;
     }
   `]
 })
