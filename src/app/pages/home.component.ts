@@ -9,7 +9,6 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 
 import { DirectusService } from '@services/directus.service';
 import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
-import { NotificationDialogComponent, NotificationDialogData } from '@components/notification-dialog.component';
 
 @Component({
   standalone: true,
@@ -36,10 +35,13 @@ import { NotificationDialogComponent, NotificationDialogData } from '@components
             {{ project.description }}
           </mat-card-content>
           <mat-card-actions>
-            <button mat-button color="accent" (click)="openProject(project.route)">
-              View project
-            </button>
-            <mat-icon svgIcon="launch" *ngIf="isExternalRoute(project.route)"></mat-icon>
+            <ng-container *ngIf="isExternalRoute(project.route); else internalLink">
+              <a mat-button color="accent" [href]="project.route">View project</a>
+              <mat-icon svgIcon="launch"></mat-icon>
+            </ng-container>
+            <ng-template #internalLink>
+              <a mat-button color="accent" [routerLink]="project.route">View project</a>
+            </ng-template>
           </mat-card-actions>
         </mat-card>
       </ng-container>
@@ -96,23 +98,4 @@ export class HomeComponent {
     }
     return url.protocol === 'http:' || url.protocol === 'https:';
   }
-
-  openProject(project: string): void {
-    if (project === 'placeholder') {
-      const data: NotificationDialogData = {
-        title: 'Project unavailable... for now.',
-        body: 'This project isn\'t available right now, sorry!',
-        buttonText: 'OK'
-      };
-      this.dialog.open(NotificationDialogComponent, { data });
-      return;
-    }
-    else if (this.isExternalRoute(project)) {
-      location.href = project;
-    }
-    else {
-      this.router.navigate([`/${project}`]);
-    }
-  }
-
 }
