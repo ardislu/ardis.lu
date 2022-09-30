@@ -37,8 +37,9 @@ import { NotificationDialogComponent, NotificationDialogData } from '@components
           </mat-card-content>
           <mat-card-actions>
             <button mat-button color="accent" (click)="openProject(project.route)">
-              EXPLORE
+              View project
             </button>
+            <mat-icon svgIcon="launch" *ngIf="isExternalRoute(project.route)"></mat-icon>
           </mat-card-actions>
         </mat-card>
       </ng-container>
@@ -68,12 +69,27 @@ import { NotificationDialogComponent, NotificationDialogData } from '@components
       margin-inline: auto;
       margin-block: 1rem;
     }
+
+    mat-icon {
+      block-size: 14px;
+    }
   `]
 })
 export class HomeComponent {
   public placeholderCards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   constructor(public directus: DirectusService, private router: Router, private dialog: MatDialog) { }
+
+  isExternalRoute(route: string): boolean {
+    let url;
+    try {
+      url = new URL(route);
+    }
+    catch (_) {
+      return false;
+    }
+    return url.protocol === 'http:' || url.protocol === 'https:';
+  }
 
   openProject(project: string): void {
     if (project === 'placeholder') {
@@ -84,6 +100,9 @@ export class HomeComponent {
       };
       this.dialog.open(NotificationDialogComponent, { data });
       return;
+    }
+    else if (this.isExternalRoute(project)) {
+      location.href = project;
     }
     else {
       this.router.navigate([`/${project}`]);
