@@ -70,6 +70,12 @@ import { NotificationDialogComponent, NotificationDialogData } from '@components
       margin-block: 1rem;
     }
 
+    mat-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
     mat-icon {
       block-size: 14px;
     }
