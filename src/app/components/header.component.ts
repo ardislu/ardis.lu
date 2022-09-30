@@ -18,18 +18,18 @@ import { AuthService } from '@services/auth.service';
   selector: 'app-header',
   template: `
     <mat-toolbar aria-label="Header">
-      <a aria-label="Home" routerLink="" mat-icon-button>
+      <a aria-label="Home" routerLink="" mat-icon-button class="logo">
         <mat-icon svgIcon="logo"></mat-icon>
       </a>
       <button aria-label="Login" mat-icon-button (click)="auth.login()" *ngIf="!auth.loggedIn">
         <mat-icon svgIcon="login"></mat-icon>
       </button>
-      <button aria-label="Settings" mat-icon-button routerLink="settings" *ngIf="auth.loggedIn">
+      <a aria-label="Settings" mat-icon-button routerLink="settings" *ngIf="auth.loggedIn">
         <mat-icon svgIcon="settings"></mat-icon>
-      </button>
-      <button aria-label="About" mat-icon-button routerLink="about">
+      </a>
+      <a aria-label="About" mat-icon-button routerLink="about">
         <mat-icon svgIcon="info"></mat-icon>
-      </button>
+      </a>
     </mat-toolbar>
   `,
   styles: [`
@@ -38,7 +38,7 @@ import { AuthService } from '@services/auth.service';
       justify-content: flex-end;
     }
 
-    a {
+    .logo {
       margin-inline-end: auto;
     }
   `]
