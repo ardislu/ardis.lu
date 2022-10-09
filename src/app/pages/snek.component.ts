@@ -1,5 +1,5 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, HostListener, Inject, OnInit, ViewChild } from '@angular/core';
+import { DOCUMENT, CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -51,6 +51,7 @@ import { SnakeGameComponent } from '@components/snake-game.component';
 export class SnekComponent implements OnInit {
   @ViewChild('game', { static: true }) game!: SnakeGameComponent;
 
+  private window;
   private minGrids = 10; // At least this many squares in any direction
   private actualWidth = 448;
   private actualHeight = 448;
@@ -63,9 +64,13 @@ export class SnekComponent implements OnInit {
   public highScore = 0;
   /* eslint-enable @typescript-eslint/member-ordering */
 
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    this.window = this.document.defaultView as Window;
+  }
+
   ngOnInit(): void {
-    this.actualWidth = Math.min(window.innerWidth * 0.7, 448);
-    this.actualHeight = Math.min(window.innerHeight * 0.35, 448);
+    this.actualWidth = Math.min(this.window.innerWidth * 0.7, 448);
+    this.actualHeight = Math.min(this.window.innerHeight * 0.35, 448);
 
     this.gameGrid = Math.floor(Math.min(this.actualWidth, this.actualHeight) / this.minGrids);
 

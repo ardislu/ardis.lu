@@ -1,5 +1,5 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ElementRef, EventEmitter, HostListener, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { DOCUMENT, CommonModule } from '@angular/common';
 
 import { SnekPiece, SnekPlayer } from '@models/snek.model';
 
@@ -20,6 +20,7 @@ export class SnakeGameComponent implements OnInit {
 
   @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
 
+  private window;
   private ctx!: CanvasRenderingContext2D;
   private player!: SnekPlayer;
   private food!: SnekPiece;
@@ -33,6 +34,10 @@ export class SnakeGameComponent implements OnInit {
   private touchEndTime!: number;
   private touchEndX!: number;
   private touchEndY!: number;
+
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    this.window = this.document.defaultView as Window;
+  }
 
   ngOnInit(): void {
     this.canvas.nativeElement.width = this.width * this.gridSize;
@@ -52,7 +57,7 @@ export class SnakeGameComponent implements OnInit {
     // Begin game loop
     this.isActive = true;
     this.previousRender = 0;
-    this.gameLoop = window.requestAnimationFrame(this.tick.bind(this));
+    this.gameLoop = this.window.requestAnimationFrame(this.tick.bind(this));
   }
 
   tick(timestamp: number): void {
@@ -63,7 +68,7 @@ export class SnakeGameComponent implements OnInit {
     }
 
     if (this.isActive) {
-      this.gameLoop = window.requestAnimationFrame(this.tick.bind(this));
+      this.gameLoop = this.window.requestAnimationFrame(this.tick.bind(this));
     }
   }
 
@@ -156,7 +161,7 @@ export class SnakeGameComponent implements OnInit {
   }
 
   endGame(): void {
-    window.cancelAnimationFrame(this.gameLoop);
+    this.window.cancelAnimationFrame(this.gameLoop);
     this.isActive = false;
     this.gameEnded.emit(this.player.body.length);
   }
