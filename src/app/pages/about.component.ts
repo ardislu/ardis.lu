@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { DirectusService } from '@services/directus.service';
 import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
+import { HeadService } from '@services/head.service';
 
 @Component({
   standalone: true,
@@ -69,5 +70,11 @@ import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
   `]
 })
 export class AboutComponent {
-  constructor(public location: Location, public directus: DirectusService) { }
+  constructor(public location: Location, public directus: DirectusService, private head: HeadService) {
+    this.head.metadata = {
+      title: 'about',
+      description: 'My portfolio website for small web experiments.',
+      canonicalUrl: 'https://ardis.lu/about'
+    };
+  }
 }

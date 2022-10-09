@@ -8,9 +8,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { RandomImageComponent } from '@components/random-image.component';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+
+import { HeadService } from '@services/head.service';
+import { RandomImageComponent } from '@components/random-image.component';
 
 @Component({
   standalone: true,
@@ -96,6 +98,14 @@ export class ImageGeneratorComponent implements OnInit {
   public inputValue!: string;
   public seed!: string;
   public inputChanged: Subject<void | string> = new Subject<void | string>();
+
+  constructor(private head: HeadService) {
+    this.head.metadata = {
+      title: 'image-generator',
+      description: 'Random image generator.',
+      canonicalUrl: 'https://ardis.lu/image-generator'
+    };
+  }
 
   ngOnInit(): void {
     // Set a 300 ms wait time between input events before proceeding

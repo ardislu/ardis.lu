@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 
 import { DirectusService } from '@services/directus.service';
+import { HeadService } from '@services/head.service';
 import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
 
 @Component({
@@ -86,7 +87,13 @@ import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
 export class HomeComponent {
   public placeholderCards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-  constructor(public directus: DirectusService, private router: Router, private dialog: MatDialog) { }
+  constructor(public directus: DirectusService, private router: Router, private dialog: MatDialog, private head: HeadService) {
+    this.head.metadata = {
+      title: 'ardis.lu',
+      description: 'Personal website to experiment with web technology and host interesting content.',
+      canonicalUrl: 'https://ardis.lu'
+    };
+  }
 
   isExternalRoute(route: string): boolean {
     let url;

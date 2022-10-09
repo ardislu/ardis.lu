@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BfService } from '@services/bf.service';
+import { HeadService } from '@services/head.service';
 
 @Component({
   standalone: true,
@@ -79,7 +80,13 @@ import { BfService } from '@services/bf.service';
 export class BfiComponent implements OnInit {
   public output!: string;
 
-  constructor(public bf: BfService) { }
+  constructor(public bf: BfService, private head: HeadService) {
+    this.head.metadata = {
+      title: 'bfi',
+      description: 'Online interpreter for a popular programming language.',
+      canonicalUrl: 'https://ardis.lu/bfi'
+    };
+  }
 
   ngOnInit(): void {
     this.bf.setHelloWorld();

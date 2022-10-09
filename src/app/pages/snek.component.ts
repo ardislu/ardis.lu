@@ -3,6 +3,8 @@ import { DOCUMENT, CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+
+import { HeadService } from '@services/head.service';
 import { SnakeGameComponent } from '@components/snake-game.component';
 
 @Component({
@@ -64,8 +66,14 @@ export class SnekComponent implements OnInit {
   public highScore = 0;
   /* eslint-enable @typescript-eslint/member-ordering */
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
+  constructor(@Inject(DOCUMENT) private document: Document, private head: HeadService) {
     this.window = this.document.defaultView as Window;
+
+    this.head.metadata = {
+      title: 'snek',
+      description: 'This is snek.',
+      canonicalUrl: 'https://ardis.lu/snek'
+    };
   }
 
   ngOnInit(): void {

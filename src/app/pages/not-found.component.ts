@@ -6,6 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import Fuse from 'fuse.js';
 
+import { HeadService } from '@services/head.service';
+
 @Component({
   standalone: true,
   imports: [
@@ -55,7 +57,13 @@ import Fuse from 'fuse.js';
 export class NotFoundComponent implements OnInit {
   public path = '';
 
-  constructor(public location: Location, private router: Router) { }
+  constructor(public location: Location, private router: Router, private head: HeadService) {
+    this.head.metadata = {
+      title: '404: Not Found',
+      description: 'The requested page does not exist.',
+      canonicalUrl: 'https://ardis.lu/404'
+    };
+  }
 
   ngOnInit(): void {
     const allPaths = this.router.config.map(r => r.path);

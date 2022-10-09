@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -12,13 +13,14 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { BostonParameters, BostonPrediction } from '@models/colab-hosting.model';
-import { ColabHostingService } from '@services/colab-hosting.service';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
-import { NotificationDialogComponent, NotificationDialogData } from '@components/notification-dialog.component';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { HttpErrorResponse } from '@angular/common/http';
+
+import { ColabHostingService } from '@services/colab-hosting.service';
+import { HeadService } from '@services/head.service';
+import { NotificationDialogComponent, NotificationDialogData } from '@components/notification-dialog.component';
+import { BostonParameters, BostonPrediction } from '@models/colab-hosting.model';
 
 @Component({
   standalone: true,
@@ -188,7 +190,13 @@ export class ColabHostingComponent {
     { value: 'bagging', viewValue: 'Extra Trees Regressor' }
   ];
 
-  constructor(private colab: ColabHostingService, private dialog: MatDialog) { }
+  constructor(private colab: ColabHostingService, private dialog: MatDialog, private head: HeadService) {
+    this.head.metadata = {
+      title: 'colab-hosting',
+      description: 'Frontend for a machine learning backend hosted in Google Colab.',
+      canonicalUrl: 'https://ardis.lu/colab-hosting'
+    };
+  }
 
   // Force https:// on ngrok URL
   setColabHost(e: Event): void {

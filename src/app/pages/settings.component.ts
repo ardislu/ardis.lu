@@ -15,6 +15,7 @@ import { AuthService } from '@services/auth.service';
 import { ThemeService } from '@services/theme.service';
 import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
 import { ConfirmationDialogData, ConfirmationDialogComponent } from '@components/confirmation-dialog.component';
+import { HeadService } from '@services/head.service';
 
 @Component({
   standalone: true,
@@ -86,7 +87,13 @@ export class SettingsComponent implements OnInit {
   public themeList$!: Observable<BaseTheme[]>;
   public themeSelection!: BaseTheme;
 
-  constructor(public auth: AuthService, public theme: ThemeService, private dialog: MatDialog) { }
+  constructor(public auth: AuthService, public theme: ThemeService, private dialog: MatDialog, private head: HeadService) {
+    this.head.metadata = {
+      title: 'Settings',
+      description: 'Configure personal user settings.',
+      canonicalUrl: 'https://ardis.lu/settings'
+    };
+  }
 
   ngOnInit(): void {
     this.themeList$ = this.theme.list();
