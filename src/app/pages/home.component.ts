@@ -33,7 +33,7 @@ import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
             <div>{{ project.title }}</div>
           </mat-card-title>
           <mat-card-content>
-            {{ project.description }}
+            <p>{{ project.description }}</p>
           </mat-card-content>
           <mat-card-actions>
             <ng-container *ngIf="isExternalRoute(project.route); else internalLink">
