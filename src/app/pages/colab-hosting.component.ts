@@ -285,7 +285,7 @@ export class ColabHostingComponent {
         buttonText: 'OK'
       };
       this.dialog.open(NotificationDialogComponent, { data });
-      return throwError(error);
+      return throwError(() => error);
     };
 
     this.bostonPrediction$ = this.colab.getBostonPrice(this.colabHost, this.selectedModel, new BostonParameters(this.customParams)).pipe(
