@@ -38,6 +38,11 @@ import { AuthService } from '@services/auth.service';
       justify-content: flex-end;
     }
 
+    a,
+    mat-icon {
+      line-height: 0;
+    }
+
     .logo {
       margin-inline-end: auto;
     }

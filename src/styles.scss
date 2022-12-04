@@ -1,17 +1,6 @@
 @use "@angular/material" as mat;
 @import "ardis-theme";
-
-/* Use system font stack */
-$system-typography: mat.define-typography-config(
-  $font-family: '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-);
-
-// Include only once per project
-@include mat.core($system-typography);
-
-.al-dark {
-  @include mat.all-component-colors($ardis-dark-theme);
-}
+@include mat.all-component-themes($ardis-dark-theme);
 
 .al-light {
   @include mat.all-component-colors($ardis-light-theme);
@@ -38,4 +27,56 @@ input::-webkit-inner-spin-button {
 // Disable scroll to change number on number input fields
 input[type="number"] {
   appearance: textfield;
+}
+
+/* Fix quirks introduced by Angular Material 15 */
+
+// Card components no longer have built-in padding
+mat-card-title,
+mat-card-subtitle {
+  padding: 6px 16px;
+}
+
+// Bug: the expansion panel dropdown is not aligned with the input
+// Workaround: set position: absolute (the positioning attributes are already set correctly)
+.cdk-overlay-pane {
+  position: absolute;
+}
+
+// Bug: the ripple effect is not shaped correctly (it shows a large box shape instead of fitting the icon shape)
+// Workaround: hide the entire ripple effect (this is a new effect introduced in v15)
+.mat-ripple-element {
+  display: none;
+}
+
+// Bug: buttons have an unnecessary z-index that puts it on top of expansion panels
+// Workaround: reset z-index because this property is not necessary
+span.mdc-button__label { /* stylelint-disable-line selector-class-pattern */
+  // !important is required for a global style to override Angular defaults
+  // Otherwise, this property needs to be duplicated into every component that uses buttons
+  // or each button tag needs to be given a more specific selector (e.g. id)
+  z-index: revert !important;
+}
+
+// Bug: modals and modal background are not centered and have no size
+// Workaround: size both to fit the entire page
+.cdk-overlay-dark-backdrop,
+.cdk-global-overlay-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+// Bug: modal backdrop has background color
+// Workaround: set the backdrop color
+.cdk-overlay-dark-backdrop {
+  background: rgb(0 0 0 / 32%);
+}
+
+// Bug: modals are not centered horizontally
+// Workaround: set display: flex (the flex centering attributes are already set correctly)
+.cdk-global-overlay-wrapper {
+  display: flex;
 }

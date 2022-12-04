@@ -132,10 +132,6 @@ import { BostonParameters, BostonPrediction } from '@models/colab-hosting.model'
       flex-direction: column;
     }
 
-    mat-radio-button {
-      margin-block: 0.3rem;
-    }
-
     mat-divider {
       margin-block: 1rem;
     }
@@ -148,7 +144,6 @@ import { BostonParameters, BostonPrediction } from '@models/colab-hosting.model'
     mat-expansion-panel-header {
       inline-size: 100%;
       padding-inline: 0.5rem;
-      padding-block: 1rem;
     }
 
     .parameter-setting {

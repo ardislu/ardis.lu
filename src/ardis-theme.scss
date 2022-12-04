@@ -106,6 +106,15 @@ $al-yellow: (
 $al-primary: mat.define-palette($al-blue);
 $al-accent: mat.define-palette($al-teal);
 $al-warn: mat.define-palette($al-yellow);
+
+// Typography
+$al-typography: mat.define-typography-config(
+  $font-family: '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+);
+
+@include mat.typography-hierarchy($al-typography); // Required to allow typographies to be inherited
+
+// Themes
 $ardis-dark-theme: mat.define-dark-theme(
   (
     color: (
@@ -113,6 +122,7 @@ $ardis-dark-theme: mat.define-dark-theme(
       accent: $al-accent,
       warn: $al-warn,
     ),
+    typography: $al-typography,
   )
 );
 $ardis-light-theme: mat.define-light-theme(
@@ -122,5 +132,6 @@ $ardis-light-theme: mat.define-light-theme(
       accent: $al-accent,
       warn: $al-warn,
     ),
+    typography: $al-typography,
   )
 );

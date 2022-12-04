@@ -43,7 +43,7 @@ import { HeadService } from '@services/head.service';
 
         <mat-form-field>
           <mat-label>Script</mat-label>
-          <textarea matInput cdkTextareaAutosize [(ngModel)]="bf.script"></textarea>
+          <textarea class="script" matInput cdkTextareaAutosize [(ngModel)]="bf.script"></textarea>
         </mat-form-field>
 
         <mat-form-field>
@@ -74,6 +74,14 @@ import { HeadService } from '@services/head.service';
 
     mat-form-field {
       inline-size: 100%;
+    }
+
+    textarea {
+      min-block-size: 1.5rem;
+    }
+
+    textarea.script {
+      min-block-size: 3rem;
     }
   `]
 })
