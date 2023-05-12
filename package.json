@@ -22,7 +22,7 @@
     "tunnel": "cloudflared tunnel run",
     "start": "ng serve --hmr --host 0.0.0.0",
     "stage": "npm run build -- --configuration production && cd dist/ardis-lu-frontend && ws --spa index.html --log.format stats --compress",
-    "analyze": "npm run build -- --configuration production --source-map --vendor-chunk=false && source-map-explorer dist/ardis-lu-frontend/main.*.js"
+    "analyze": "npm run build -- --configuration production --source-map --named-chunks && source-map-explorer dist/ardis-lu-frontend/*.js --no-border-checks"
   },
   "private": true,
   "dependencies": {
