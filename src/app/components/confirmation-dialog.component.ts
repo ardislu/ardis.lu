@@ -21,7 +21,9 @@ export interface ConfirmationDialogData {
   ],
   selector: 'app-confirmation-dialog',
   template: `
-    <h2 mat-dialog-title *ngIf="data.title">{{ data.title }}</h2>
+    @if (data.title) {
+      <h2 mat-dialog-title>{{ data.title }}</h2>
+    }
 
     <mat-dialog-content>
       {{ data.body }}

@@ -30,14 +30,12 @@ import { HeadService } from '@services/head.service';
         </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <p *ngIf="path; else noSuggestion">
-          Did you mean <a [routerLink]="['/' + path]">{{ path }}</a>?
-        </p>
-        <ng-template #noSuggestion>
-          <p>
-            Use the buttons below to return to safety.
-          </p>
-        </ng-template>
+        @if (path) {
+          <p>Did you mean <a [routerLink]="['/' + path]">{{ path }}</a>?</p>
+        }
+        @else {
+          <p>Use the buttons below to return to safety.</p>
+        }
       </mat-card-content>
       <mat-card-actions>
         <button mat-button color="accent" (click)="location.back()">BACK</button>

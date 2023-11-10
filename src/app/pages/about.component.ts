@@ -22,7 +22,7 @@ import { HeadService } from '@services/head.service';
   selector: 'app-about',
   template: `
     <!-- Fetch About info from CMS -->
-    <ng-container *ngIf="directus.about$ | async as aboutCard; else loading">
+    @if (directus.about$ | async; as aboutCard) {
       <mat-card>
         <mat-card-header>
           <mat-icon mat-card-avatar svgIcon="logo"></mat-icon>
@@ -46,10 +46,9 @@ import { HeadService } from '@services/head.service';
           <button mat-button color="accent" routerLink="/">HOME</button>
         </mat-card-actions>
       </mat-card>
-    </ng-container>
-
-    <!-- Placeholder loading bars -->
-    <ng-template #loading>
+    }
+    @else {
+      <!-- Placeholder loading bars -->
       <mat-card>
         <mat-card-title>
           <app-skeleton-loader></app-skeleton-loader>
@@ -58,7 +57,7 @@ import { HeadService } from '@services/head.service';
           <app-skeleton-loader [count]="8"></app-skeleton-loader>
         </mat-card-content>
       </mat-card>
-    </ng-template>
+    }
   `,
   styles: `
     mat-card {

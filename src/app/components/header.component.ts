@@ -21,12 +21,16 @@ import { AuthService } from '@services/auth.service';
       <a aria-label="Home" routerLink="" mat-icon-button class="logo">
         <mat-icon svgIcon="logo"></mat-icon>
       </a>
-      <button aria-label="Login" mat-icon-button (click)="auth.login()" *ngIf="!auth.loggedIn">
-        <mat-icon svgIcon="login"></mat-icon>
-      </button>
-      <a aria-label="Settings" mat-icon-button routerLink="settings" *ngIf="auth.loggedIn">
-        <mat-icon svgIcon="settings"></mat-icon>
-      </a>
+      @if (auth.loggedIn) {
+        <a aria-label="Settings" mat-icon-button routerLink="settings">
+          <mat-icon svgIcon="settings"></mat-icon>
+        </a>
+      }
+      @else {
+        <button aria-label="Login" mat-icon-button (click)="auth.login()">
+          <mat-icon svgIcon="login"></mat-icon>
+        </button>
+      }
       <a aria-label="About" mat-icon-button routerLink="about">
         <mat-icon svgIcon="info"></mat-icon>
       </a>

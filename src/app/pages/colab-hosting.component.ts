@@ -65,9 +65,17 @@ import { BostonParameters, BostonPrediction } from '@models/colab-hosting.model'
           <mat-radio-button value="custom">Custom</mat-radio-button>
         </mat-radio-group>
 
-        <ng-container *ngIf="bostonPrediction$ | async as bostonPrediction; else pricePlaceholder">
+        @if (bostonPrediction$ | async; as bostonPrediction) {
           <h2>{{ bostonPrediction.price * 1000 | currency }}</h2>
-        </ng-container>
+        }
+        @else {
+          @if (showFirstContent) {
+            <h2>Press GET PRICE to predict the house price!</h2>
+          }
+          @else {
+            <mat-spinner [diameter]="25"></mat-spinner>
+          }
+        }
 
         <mat-divider></mat-divider>
 
@@ -79,17 +87,20 @@ import { BostonParameters, BostonPrediction } from '@models/colab-hosting.model'
           <mat-form-field class="text-block" appearance="fill">
             <mat-label>Machine learning model</mat-label>
             <mat-select [(ngModel)]="selectedModel" name="model">
-              <mat-option *ngFor="let model of bostonModels" [value]="model.value">
-                {{model.viewValue}}
-              </mat-option>
+              @for (model of bostonModels; track model) {
+                <mat-option [value]="model.value">
+                  {{model.viewValue}}
+                </mat-option>
+              }
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field class="parameter-setting" *ngFor="let item of customParams | keyvalue; trackBy: trackByNull">
-            <mat-label>{{ item.key }}</mat-label>
-            <input matInput [value]="item.value" (change)="setParam(item.key, $event)" type="number" step="0.00001">
-          </mat-form-field>
-
+          @for (item of customParams | keyvalue; track null) {
+              <mat-form-field class="parameter-setting">
+                <mat-label>{{ item.key }}</mat-label>
+                <input matInput [value]="item.value" (change)="setParam(item.key, $event)" type="number" step="0.00001">
+              </mat-form-field>
+          }
         </mat-expansion-panel>
       </mat-card-content>
 
@@ -100,16 +111,6 @@ import { BostonParameters, BostonPrediction } from '@models/colab-hosting.model'
         <button mat-button color="accent" routerLink="/">HOME</button>
       </mat-card-actions>
     </mat-card>
-
-    <ng-template #pricePlaceholder>
-      <ng-container *ngIf="showFirstContent; else loading">
-        <h2>Press GET PRICE to predict the house price!</h2>
-      </ng-container>
-    </ng-template>
-
-    <ng-template #loading>
-      <mat-spinner [diameter]="25"></mat-spinner>
-    </ng-template>
   `,
   styles: `
     mat-card {
@@ -258,11 +259,6 @@ export class ColabHostingComponent {
       this.showAdvancedOptions = true;
     }
   }
-
-  // Pass as a *ngFor trackBy function to disable re-rendering on this *ngFor loop
-  // Note: elements within the loop must handle data binding on their own
-  trackByNull(): void {
-  };
 
   // Custom behavior on param input field change instead of two-way data binding
   setParam(param: string, e: Event) {

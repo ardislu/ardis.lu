@@ -5,7 +5,11 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   selector: 'app-skeleton-loader',
-  template: `<div class="skeleton-line" *ngFor="let _ of [].constructor(count)"></div>`,
+  template: `
+    @for (_ of [].constructor(count); track null) {
+      <div class="skeleton-line"></div>
+    }
+  `,
   styles: `
     .skeleton-line {
       inline-size: 100%;

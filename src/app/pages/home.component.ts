@@ -27,40 +27,43 @@ import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
   template: `
     <main>
       <!-- Project cards fetched from API  -->
-      <ng-container *ngIf="directus.cards$ | async as projectCards; else loading">
-        <mat-card *ngFor="let project of projectCards">
-          <mat-card-title>
-            <div>{{ project.title }}</div>
-          </mat-card-title>
-          <mat-card-content>
-            <p>{{ project.description }}</p>
-          </mat-card-content>
-          <mat-card-actions>
-            <ng-container *ngIf="isExternalRoute(project.route); else internalLink">
-              <a mat-button color="accent" [href]="project.route">View project</a>
-              <mat-icon svgIcon="launch"></mat-icon>
-            </ng-container>
-            <ng-template #internalLink>
-              <a mat-button color="accent" [routerLink]="project.route">View project</a>
-            </ng-template>
-          </mat-card-actions>
-        </mat-card>
-      </ng-container>
-
-      <!-- Skeleton cards as placeholders while loading -->
-      <ng-template #loading>
-        <mat-card *ngFor="let num of placeholderCards">
-          <mat-card-title>
-            <app-skeleton-loader></app-skeleton-loader>
-          </mat-card-title>
-          <mat-card-content>
-            <app-skeleton-loader [count]="10"></app-skeleton-loader>
-          </mat-card-content>
-          <mat-card-actions>
-            <app-skeleton-loader></app-skeleton-loader>
-          </mat-card-actions>
-        </mat-card>
-      </ng-template>
+      @if (directus.cards$ | async; as projectCards) {
+        @for (project of projectCards; track project) {
+          <mat-card>
+            <mat-card-title>
+              <div>{{ project.title }}</div>
+            </mat-card-title>
+            <mat-card-content>
+              <p>{{ project.description }}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              @if (isExternalRoute(project.route)) {
+                <a mat-button color="accent" [href]="project.route">View project</a>
+                <mat-icon svgIcon="launch"></mat-icon>
+              }
+              @else {
+                <a mat-button color="accent" [routerLink]="project.route">View project</a>
+              }
+            </mat-card-actions>
+          </mat-card>
+        }
+      }
+      @else {
+        @for (num of placeholderCards; track null) {
+          <!-- Skeleton cards as placeholders while loading -->
+          <mat-card>
+            <mat-card-title>
+              <app-skeleton-loader></app-skeleton-loader>
+            </mat-card-title>
+            <mat-card-content>
+              <app-skeleton-loader [count]="10"></app-skeleton-loader>
+            </mat-card-content>
+            <mat-card-actions>
+              <app-skeleton-loader></app-skeleton-loader>
+            </mat-card-actions>
+          </mat-card>
+        }
+      }
     </main>
   `,
   styles: `

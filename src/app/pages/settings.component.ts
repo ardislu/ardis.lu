@@ -34,7 +34,7 @@ import { HeadService } from '@services/head.service';
   selector: 'app-settings',
   template: `
     <!-- Fetch user profile from Auth0 -->
-    <ng-container *ngIf="auth.userProfile$ | async as profile; else loading">
+    @if (auth.userProfile$ | async; as profile) {
       <mat-card>
         <mat-card-header>
           <img mat-card-image mat-card-avatar [src]="profile.picture">
@@ -49,9 +49,11 @@ import { HeadService } from '@services/head.service';
           <mat-form-field>
             <mat-label>Theme</mat-label>
             <mat-select [(ngModel)]="themeSelection" (selectionChange)="theme.setTheme(themeSelection)">
-              <mat-option *ngFor="let theme of themeList$ | async" [value]="theme">
-                {{ theme.displayName }}
-              </mat-option>
+              @for (theme of themeList$ | async; track theme) {
+                <mat-option [value]="theme">
+                  {{ theme.displayName }}
+                </mat-option>
+              }
             </mat-select>
           </mat-form-field>
         </mat-card-content>
@@ -60,10 +62,9 @@ import { HeadService } from '@services/head.service';
           <button mat-button color="warn" (click)="logout()">LOG OUT</button>
         </mat-card-actions>
       </mat-card>
-    </ng-container>
-
-    <!-- Placeholder loading bars -->
-    <ng-template #loading>
+    }
+    @else {
+      <!-- Placeholder loading bars -->
       <mat-card>
         <mat-card-title>
           <app-skeleton-loader></app-skeleton-loader>
@@ -72,7 +73,7 @@ import { HeadService } from '@services/head.service';
           <app-skeleton-loader [count]="5"></app-skeleton-loader>
         </mat-card-content>
       </mat-card>
-    </ng-template>
+    }
   `,
   styles: `
     mat-card {
