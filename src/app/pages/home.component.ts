@@ -63,7 +63,7 @@ import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
       </ng-template>
     </main>
   `,
-  styles: [`
+  styles: `
     main {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
@@ -82,7 +82,7 @@ import { SkeletonLoaderComponent } from '@components/skeleton-loader.component';
     mat-icon {
       block-size: 14px;
     }
-  `]
+  `
 })
 export class HomeComponent {
   public placeholderCards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];

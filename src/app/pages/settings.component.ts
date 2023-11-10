@@ -74,14 +74,14 @@ import { HeadService } from '@services/head.service';
       </mat-card>
     </ng-template>
   `,
-  styles: [`
+  styles: `
     mat-card {
       box-sizing: border-box;
       inline-size: min(100% - 2rem, 720px);
       margin-inline: auto;
       margin-block: 1rem;
     }
-  `]
+  `
 })
 export class SettingsComponent implements OnInit {
   public themeList$!: Observable<BaseTheme[]>;

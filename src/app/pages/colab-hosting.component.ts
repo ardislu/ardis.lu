@@ -111,7 +111,7 @@ import { BostonParameters, BostonPrediction } from '@models/colab-hosting.model'
       <mat-spinner [diameter]="25"></mat-spinner>
     </ng-template>
   `,
-  styles: [`
+  styles: `
     mat-card {
       box-sizing: border-box;
       inline-size: min(100% - 2rem, 720px);
@@ -150,7 +150,7 @@ import { BostonParameters, BostonPrediction } from '@models/colab-hosting.model'
       inline-size: 7rem;
       margin-inline-end: 1rem;
     }
-  `]
+  `
 })
 export class ColabHostingComponent {
   // Basic form controls

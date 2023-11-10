@@ -37,7 +37,7 @@ import { SnakeGameComponent } from '@components/snake-game.component';
       </mat-card-actions>
     </mat-card>
   `,
-  styles: [`
+  styles: `
     mat-card {
       box-sizing: border-box;
       inline-size: min(100% - 2rem, 480px);
@@ -48,7 +48,7 @@ import { SnakeGameComponent } from '@components/snake-game.component';
     mat-card-content {
       text-align: center;
     }
-  `]
+  `
 })
 export class SnekComponent implements OnInit {
   @ViewChild('game', { static: true }) game!: SnakeGameComponent;

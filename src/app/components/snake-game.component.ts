@@ -8,7 +8,7 @@ import { SnekPiece, SnekPlayer } from '@models/snek.model';
   imports: [CommonModule],
   selector: 'app-snake-game',
   template: `<canvas #canvas></canvas>`,
-  styles: ['']
+  styles: ''
 })
 export class SnakeGameComponent implements OnInit {
   @Input() gridSize = 10;

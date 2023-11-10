@@ -60,7 +60,7 @@ import { HeadService } from '@services/head.service';
       </mat-card-actions>
     </mat-card>
   `,
-  styles: [`
+  styles: `
     mat-card {
       box-sizing: border-box;
       inline-size: min(100% - 2rem, 720px);
@@ -83,7 +83,7 @@ import { HeadService } from '@services/head.service';
     textarea.script {
       min-block-size: 3rem;
     }
-  `]
+  `
 })
 export class BfiComponent implements OnInit {
   public output!: string;

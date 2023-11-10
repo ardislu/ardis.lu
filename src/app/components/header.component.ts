@@ -32,7 +32,7 @@ import { AuthService } from '@services/auth.service';
       </a>
     </mat-toolbar>
   `,
-  styles: [`
+  styles: `
     mat-toolbar {
       display: flex;
       justify-content: flex-end;
@@ -46,7 +46,7 @@ import { AuthService } from '@services/auth.service';
     .logo {
       margin-inline-end: auto;
     }
-  `]
+  `
 })
 export class HeaderComponent {
   constructor(public auth: AuthService) { }

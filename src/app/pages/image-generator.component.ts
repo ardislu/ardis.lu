@@ -59,7 +59,7 @@ import { RandomImageComponent } from '@components/random-image.component';
       </mat-card-actions>
     </mat-card>
   `,
-  styles: [`
+  styles: `
     mat-card {
       display: flex;
       flex-direction: column;
@@ -92,7 +92,7 @@ import { RandomImageComponent } from '@components/random-image.component';
       height: 1px;
       flex-grow: 1;
     }
-  `]
+  `
 })
 export class ImageGeneratorComponent implements OnInit {
   public inputValue!: string;

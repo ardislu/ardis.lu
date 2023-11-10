@@ -30,7 +30,7 @@ export interface NotificationDialogData {
       <button mat-button mat-dialog-close color="accent">{{ data.buttonText }}</button>
     </mat-dialog-actions>
   `,
-  styles: ['']
+  styles: ''
 })
 export class NotificationDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: NotificationDialogData) { }

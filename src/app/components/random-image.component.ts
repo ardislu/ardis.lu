@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   selector: 'app-random-image',
   template: `<canvas #canvas></canvas>`,
-  styles: ['']
+  styles: ''
 })
 export class RandomImageComponent implements OnInit, OnChanges {
   @Input() seed: string = Math.random().toString();

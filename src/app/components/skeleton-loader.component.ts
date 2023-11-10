@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   selector: 'app-skeleton-loader',
   template: `<div class="skeleton-line" *ngFor="let _ of [].constructor(count)"></div>`,
-  styles: [`
+  styles: `
     .skeleton-line {
       inline-size: 100%;
       block-size: 1rem;
@@ -21,7 +21,7 @@ import { CommonModule } from '@angular/common';
         background: hsl(0deg 0% 85%);
       }
     }
-  `]
+  `
 })
 export class SkeletonLoaderComponent {
   @Input() count = 1;

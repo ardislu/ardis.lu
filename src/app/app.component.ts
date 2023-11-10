@@ -16,7 +16,7 @@ import { ThemeService } from '@services/theme.service';
     <app-header></app-header>
     <router-outlet></router-outlet>
   `,
-  styles: ['']
+  styles: ''
 })
 export class AppComponent {
   constructor(private theme: ThemeService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {

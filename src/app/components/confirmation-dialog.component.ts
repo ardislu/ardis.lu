@@ -32,7 +32,7 @@ export interface ConfirmationDialogData {
       <button mat-button [mat-dialog-close]="true" color="warn">{{ data.confirmButtonText }}</button>
     </mat-dialog-actions>
   `,
-  styles: ['']
+  styles: ''
 })
 export class ConfirmationDialogComponent {
   constructor(private dialogRef: MatDialogRef<ConfirmationDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: ConfirmationDialogData) {
