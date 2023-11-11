@@ -68,13 +68,11 @@ import { BostonParameters, BostonPrediction } from '@models/colab-hosting.model'
         @if (bostonPrediction$ | async; as bostonPrediction) {
           <h2>{{ bostonPrediction.price * 1000 | currency }}</h2>
         }
+        @else if (showFirstContent) {
+          <h2>Press GET PRICE to predict the house price!</h2>
+        }
         @else {
-          @if (showFirstContent) {
-            <h2>Press GET PRICE to predict the house price!</h2>
-          }
-          @else {
-            <mat-spinner [diameter]="25"></mat-spinner>
-          }
+          <mat-spinner [diameter]="25"></mat-spinner>
         }
 
         <mat-divider></mat-divider>
