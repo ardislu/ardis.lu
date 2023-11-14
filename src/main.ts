@@ -3,7 +3,7 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { AppComponent } from './app/app.component';
 import { AuthGuard } from '@guards/auth.guard';
 import { environment } from '@environment';
@@ -32,8 +32,8 @@ bootstrapApplication(AppComponent, {
       RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled', preloadingStrategy: PreloadAllModules }),
       BrowserModule,
       BrowserAnimationsModule,
-      ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
-      HttpClientModule
-    )
+      ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production })
+    ),
+    provideHttpClient(withFetch())
   ]
 });
