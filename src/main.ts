@@ -1,8 +1,8 @@
 import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { Routes, PreloadAllModules, provideRouter, withPreloading, withInMemoryScrolling } from '@angular/router';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideServiceWorker } from '@angular/service-worker';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { AppComponent } from './app/app.component';
 import { AuthGuard } from '@guards/auth.guard';
@@ -28,15 +28,13 @@ const routes: Routes = [
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(
-      BrowserModule,
-      BrowserAnimationsModule,
-      ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production })
-    ),
+    importProvidersFrom(BrowserModule),
     provideRouter(routes,
       withPreloading(PreloadAllModules),
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })
     ),
-    provideHttpClient(withFetch())
+    provideHttpClient(withFetch()),
+    provideAnimationsAsync(),
+    provideServiceWorker('./ngsw-worker.js', { enabled: environment.production })
   ]
 });
