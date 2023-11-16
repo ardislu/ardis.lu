@@ -1,5 +1,5 @@
 import { Component, HostListener, Inject, OnInit, ViewChild } from '@angular/core';
-import { DOCUMENT, CommonModule } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,7 +10,6 @@ import { SnakeGameComponent } from '@components/snake-game.component';
 @Component({
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule,
     MatCardModule,
     MatButtonModule,

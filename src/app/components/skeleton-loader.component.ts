@@ -1,9 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   selector: 'app-skeleton-loader',
   template: `
     @for (_ of [].constructor(count); track null) {

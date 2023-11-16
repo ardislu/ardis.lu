@@ -1,11 +1,11 @@
 import { Component, ElementRef, EventEmitter, HostListener, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { DOCUMENT, CommonModule } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 
 import { SnekPiece, SnekPlayer } from '@models/snek.model';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   selector: 'app-snake-game',
   template: `<canvas #canvas></canvas>`,
   styles: ''
