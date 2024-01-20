@@ -80,3 +80,13 @@ span.mdc-button__label { /* stylelint-disable-line selector-class-pattern */
 .cdk-global-overlay-wrapper {
   display: flex;
 }
+
+/* Fix quirks introduced by Angular Material 17 */
+
+// Bug: Angular Material fails to generate .mat-app-background class (possibly a
+// purgecss issue?)
+// Workaround: define it in user style sheet
+.mat-app-background {
+  background: var(--mat-app-background-color);
+  color: var(--mat-app-text-color);
+}
